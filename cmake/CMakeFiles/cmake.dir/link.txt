@@ -1,1 +1,0 @@
-/usr/bin/cc  -fPIC   -shared -Wl,-soname,libcmake.so -o libcmake.so CMakeFiles/cmake.dir/source/src/cmake.c.o 

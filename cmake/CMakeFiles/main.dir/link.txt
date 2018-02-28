@@ -1,1 +1,0 @@
-/usr/bin/cc     CMakeFiles/main.dir/source/src/main.c.o  -o main 

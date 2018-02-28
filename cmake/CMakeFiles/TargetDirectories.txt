@@ -1,4 +1,0 @@
-/home/zyf/code/294797392.github.io/cmake/CMakeFiles/rebuild_cache.dir
-/home/zyf/code/294797392.github.io/cmake/CMakeFiles/edit_cache.dir
-/home/zyf/code/294797392.github.io/cmake/CMakeFiles/main.dir
-/home/zyf/code/294797392.github.io/cmake/CMakeFiles/cmake.dir
