@@ -12,15 +12,37 @@ cmake的官方文档里对每个cmake命令都有非常详细的说明和使用�
 官方文档里的命令语法格式差不多只有这些了，下面举例子说明如何使用cmake命令。
 
 ## cmake命令调用例子
-这里举一个比较全面的例子，请看以下命令定义：  
+这里举一个比较全面的例子，请看下面的命令定义：  
 
-**`add_executable(<name> [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] [source1] [source2 ...])`**  
+**`add_executable(<name> [WIN32] [MACOSX_BUNDLE] [EXCLUDE_FROM_ALL] [source1] [source2 ...])`**
 
 分析上面的这条命令，其中name包含在尖括号内，说明是一个必填项；WIN32，MACOSX_BUNDLE，EXCLUDE_FROM_ALL包含在中括号内，说明是一个可选项，大写英文单词，说明如果使用该选项，则选项的值必须与尖括号里的值相同；source1，source2使用了尖括号，说明source1和source2是可选项，小写字母说明该选项的值可以由我们自定义；命令最后还有一个省略号，意思是可以写多个source。
 根据上面说的规则，下面列举以下几种正确的调用形式：  
 
 **add_executable(demo WIN32 EXCLUDE_FROM_ALL src/main.c src/log.c src/demo.c)**  
 **add_executable(http_client WIN32 src/main.c src/http.c)**  
-**add_executable(http_svc src/http.c)**  
+**add_executable(http_svc src/http.c)**
 
 记住，只要遵循以上说的规则，那么你写出来的命令语法肯定不会出错。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
