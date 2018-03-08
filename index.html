@@ -46,14 +46,15 @@
 				if(window.m_iframe == null)
 				{
 					window.m_iframe = document.getElementById("iframe");
-					window.m_iframe_panel = window.m_iframe.parent;
+					window.m_iframe_document = window.m_iframe.document || window.m_iframe.contentWindow.document;
 
 					window.m_iframe.onload = function()
 					{
 						var iframe = window.m_iframe;
-						var document = iframe.document || iframe.contentWindow.document;
+						var document = window.m_iframe_document;
 						iframe.height = document.body.scrollHeight; // 网页正文高度
 					}
+
 					window.m_iframe.onload();
 				}
 			}
@@ -63,7 +64,7 @@
 				init_iframe();
 			};
 		</script>
-	
+
     </head>
 
     <body>
@@ -81,32 +82,11 @@
 	  	</div>
 	  
 	<div class="ui main container">
-		<iframe id="iframe" width="100%" frameborder="0" src="frame_content.html">
+		<iframe id="iframe" width="100%" frameborder="0" src="frame_blog_category.html">
 			
 		</iframe>
 	</div>
 		
-	</div>
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
     </body>
 
 </html>
