@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B9104F91-11E5-4EB3-8E7A-EEDA25FF502F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_294797392.github.io</RootNamespace>
+    <AssemblyName>294797392.github.io</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\javascripts\vms\" />
+    <Folder Include="assets\styles\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\javascripts\jquery.js" />
+    <Content Include="assets\javascripts\knockout.js" />
+    <Content Include="assets\javascripts\markdown.js" />
+    <Content Include="assets\javascripts\render.js" />
+    <Content Include="assets\semantic-ui\components\accordion.css" />
+    <Content Include="assets\semantic-ui\components\accordion.js" />
+    <Content Include="assets\semantic-ui\components\accordion.min.css" />
+    <Content Include="assets\semantic-ui\components\accordion.min.js" />
+    <Content Include="assets\semantic-ui\components\ad.css" />
+    <Content Include="assets\semantic-ui\components\ad.min.css" />
+    <Content Include="assets\semantic-ui\components\api.js" />
+    <Content Include="assets\semantic-ui\components\api.min.js" />
+    <Content Include="assets\semantic-ui\components\breadcrumb.css" />
+    <Content Include="assets\semantic-ui\components\breadcrumb.min.css" />
+    <Content Include="assets\semantic-ui\components\button.css" />
+    <Content Include="assets\semantic-ui\components\button.min.css" />
+    <Content Include="assets\semantic-ui\components\card.css" />
+    <Content Include="assets\semantic-ui\components\card.min.css" />
+    <Content Include="assets\semantic-ui\components\checkbox.css" />
+    <Content Include="assets\semantic-ui\components\checkbox.js" />
+    <Content Include="assets\semantic-ui\components\checkbox.min.css" />
+    <Content Include="assets\semantic-ui\components\checkbox.min.js" />
+    <Content Include="assets\semantic-ui\components\colorize.js" />
+    <Content Include="assets\semantic-ui\components\colorize.min.js" />
+    <Content Include="assets\semantic-ui\components\comment.css" />
+    <Content Include="assets\semantic-ui\components\comment.min.css" />
+    <Content Include="assets\semantic-ui\components\container.css" />
+    <Content Include="assets\semantic-ui\components\container.min.css" />
+    <Content Include="assets\semantic-ui\components\dimmer.css" />
+    <Content Include="assets\semantic-ui\components\dimmer.js" />
+    <Content Include="assets\semantic-ui\components\dimmer.min.css" />
+    <Content Include="assets\semantic-ui\components\dimmer.min.js" />
+    <Content Include="assets\semantic-ui\components\divider.css" />
+    <Content Include="assets\semantic-ui\components\divider.min.css" />
+    <Content Include="assets\semantic-ui\components\dropdown.css" />
+    <Content Include="assets\semantic-ui\components\dropdown.js" />
+    <Content Include="assets\semantic-ui\components\dropdown.min.css" />
+    <Content Include="assets\semantic-ui\components\dropdown.min.js" />
+    <Content Include="assets\semantic-ui\components\embed.css" />
+    <Content Include="assets\semantic-ui\components\embed.js" />
+    <Content Include="assets\semantic-ui\components\embed.min.css" />
+    <Content Include="assets\semantic-ui\components\embed.min.js" />
+    <Content Include="assets\semantic-ui\components\feed.css" />
+    <Content Include="assets\semantic-ui\components\feed.min.css" />
+    <Content Include="assets\semantic-ui\components\flag.css" />
+    <Content Include="assets\semantic-ui\components\flag.min.css" />
+    <Content Include="assets\semantic-ui\components\form.css" />
+    <Content Include="assets\semantic-ui\components\form.js" />
+    <Content Include="assets\semantic-ui\components\form.min.css" />
+    <Content Include="assets\semantic-ui\components\form.min.js" />
+    <Content Include="assets\semantic-ui\components\grid.css" />
+    <Content Include="assets\semantic-ui\components\grid.min.css" />
+    <Content Include="assets\semantic-ui\components\header.css" />
+    <Content Include="assets\semantic-ui\components\header.min.css" />
+    <Content Include="assets\semantic-ui\components\icon.css" />
+    <Content Include="assets\semantic-ui\components\icon.min.css" />
+    <Content Include="assets\semantic-ui\components\image.css" />
+    <Content Include="assets\semantic-ui\components\image.min.css" />
+    <Content Include="assets\semantic-ui\components\input.css" />
+    <Content Include="assets\semantic-ui\components\input.min.css" />
+    <Content Include="assets\semantic-ui\components\item.css" />
+    <Content Include="assets\semantic-ui\components\item.min.css" />
+    <Content Include="assets\semantic-ui\components\label.css" />
+    <Content Include="assets\semantic-ui\components\label.min.css" />
+    <Content Include="assets\semantic-ui\components\list.css" />
+    <Content Include="assets\semantic-ui\components\list.min.css" />
+    <Content Include="assets\semantic-ui\components\loader.css" />
+    <Content Include="assets\semantic-ui\components\loader.min.css" />
+    <Content Include="assets\semantic-ui\components\menu.css" />
+    <Content Include="assets\semantic-ui\components\menu.min.css" />
+    <Content Include="assets\semantic-ui\components\message.css" />
+    <Content Include="assets\semantic-ui\components\message.min.css" />
+    <Content Include="assets\semantic-ui\components\modal.css" />
+    <Content Include="assets\semantic-ui\components\modal.js" />
+    <Content Include="assets\semantic-ui\components\modal.min.css" />
+    <Content Include="assets\semantic-ui\components\modal.min.js" />
+    <Content Include="assets\semantic-ui\components\nag.css" />
+    <Content Include="assets\semantic-ui\components\nag.js" />
+    <Content Include="assets\semantic-ui\components\nag.min.css" />
+    <Content Include="assets\semantic-ui\components\nag.min.js" />
+    <Content Include="assets\semantic-ui\components\popup.css" />
+    <Content Include="assets\semantic-ui\components\popup.js" />
+    <Content Include="assets\semantic-ui\components\popup.min.css" />
+    <Content Include="assets\semantic-ui\components\popup.min.js" />
+    <Content Include="assets\semantic-ui\components\progress.css" />
+    <Content Include="assets\semantic-ui\components\progress.js" />
+    <Content Include="assets\semantic-ui\components\progress.min.css" />
+    <Content Include="assets\semantic-ui\components\progress.min.js" />
+    <Content Include="assets\semantic-ui\components\rail.css" />
+    <Content Include="assets\semantic-ui\components\rail.min.css" />
+    <Content Include="assets\semantic-ui\components\rating.css" />
+    <Content Include="assets\semantic-ui\components\rating.js" />
+    <Content Include="assets\semantic-ui\components\rating.min.css" />
+    <Content Include="assets\semantic-ui\components\rating.min.js" />
+    <Content Include="assets\semantic-ui\components\reset.css" />
+    <Content Include="assets\semantic-ui\components\reset.min.css" />
+    <Content Include="assets\semantic-ui\components\reveal.css" />
+    <Content Include="assets\semantic-ui\components\reveal.min.css" />
+    <Content Include="assets\semantic-ui\components\search.css" />
+    <Content Include="assets\semantic-ui\components\search.js" />
+    <Content Include="assets\semantic-ui\components\search.min.css" />
+    <Content Include="assets\semantic-ui\components\search.min.js" />
+    <Content Include="assets\semantic-ui\components\segment.css" />
+    <Content Include="assets\semantic-ui\components\segment.min.css" />
+    <Content Include="assets\semantic-ui\components\shape.css" />
+    <Content Include="assets\semantic-ui\components\shape.js" />
+    <Content Include="assets\semantic-ui\components\shape.min.css" />
+    <Content Include="assets\semantic-ui\components\shape.min.js" />
+    <Content Include="assets\semantic-ui\components\sidebar.css" />
+    <Content Include="assets\semantic-ui\components\sidebar.js" />
+    <Content Include="assets\semantic-ui\components\sidebar.min.css" />
+    <Content Include="assets\semantic-ui\components\sidebar.min.js" />
+    <Content Include="assets\semantic-ui\components\site.css" />
+    <Content Include="assets\semantic-ui\components\site.js" />
+    <Content Include="assets\semantic-ui\components\site.min.css" />
+    <Content Include="assets\semantic-ui\components\site.min.js" />
+    <Content Include="assets\semantic-ui\components\state.js" />
+    <Content Include="assets\semantic-ui\components\state.min.js" />
+    <Content Include="assets\semantic-ui\components\statistic.css" />
+    <Content Include="assets\semantic-ui\components\statistic.min.css" />
+    <Content Include="assets\semantic-ui\components\step.css" />
+    <Content Include="assets\semantic-ui\components\step.min.css" />
+    <Content Include="assets\semantic-ui\components\sticky.css" />
+    <Content Include="assets\semantic-ui\components\sticky.js" />
+    <Content Include="assets\semantic-ui\components\sticky.min.css" />
+    <Content Include="assets\semantic-ui\components\sticky.min.js" />
+    <Content Include="assets\semantic-ui\components\tab.css" />
+    <Content Include="assets\semantic-ui\components\tab.js" />
+    <Content Include="assets\semantic-ui\components\tab.min.css" />
+    <Content Include="assets\semantic-ui\components\tab.min.js" />
+    <Content Include="assets\semantic-ui\components\table.css" />
+    <Content Include="assets\semantic-ui\components\table.min.css" />
+    <Content Include="assets\semantic-ui\components\transition.css" />
+    <Content Include="assets\semantic-ui\components\transition.js" />
+    <Content Include="assets\semantic-ui\components\transition.min.css" />
+    <Content Include="assets\semantic-ui\components\transition.min.js" />
+    <Content Include="assets\semantic-ui\components\video.css" />
+    <Content Include="assets\semantic-ui\components\video.js" />
+    <Content Include="assets\semantic-ui\components\video.min.css" />
+    <Content Include="assets\semantic-ui\components\video.min.js" />
+    <Content Include="assets\semantic-ui\components\visibility.js" />
+    <Content Include="assets\semantic-ui\components\visibility.min.js" />
+    <Content Include="assets\semantic-ui\components\visit.js" />
+    <Content Include="assets\semantic-ui\components\visit.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\accordion.css" />
+    <Content Include="assets\semantic-ui\dist\components\accordion.js" />
+    <Content Include="assets\semantic-ui\dist\components\accordion.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\accordion.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\ad.css" />
+    <Content Include="assets\semantic-ui\dist\components\ad.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\api.js" />
+    <Content Include="assets\semantic-ui\dist\components\api.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\breadcrumb.css" />
+    <Content Include="assets\semantic-ui\dist\components\breadcrumb.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\button.css" />
+    <Content Include="assets\semantic-ui\dist\components\button.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\card.css" />
+    <Content Include="assets\semantic-ui\dist\components\card.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\checkbox.css" />
+    <Content Include="assets\semantic-ui\dist\components\checkbox.js" />
+    <Content Include="assets\semantic-ui\dist\components\checkbox.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\checkbox.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\colorize.js" />
+    <Content Include="assets\semantic-ui\dist\components\colorize.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\comment.css" />
+    <Content Include="assets\semantic-ui\dist\components\comment.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\container.css" />
+    <Content Include="assets\semantic-ui\dist\components\container.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\dimmer.css" />
+    <Content Include="assets\semantic-ui\dist\components\dimmer.js" />
+    <Content Include="assets\semantic-ui\dist\components\dimmer.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\dimmer.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\divider.css" />
+    <Content Include="assets\semantic-ui\dist\components\divider.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\dropdown.css" />
+    <Content Include="assets\semantic-ui\dist\components\dropdown.js" />
+    <Content Include="assets\semantic-ui\dist\components\dropdown.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\dropdown.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\embed.css" />
+    <Content Include="assets\semantic-ui\dist\components\embed.js" />
+    <Content Include="assets\semantic-ui\dist\components\embed.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\embed.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\feed.css" />
+    <Content Include="assets\semantic-ui\dist\components\feed.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\flag.css" />
+    <Content Include="assets\semantic-ui\dist\components\flag.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\form.css" />
+    <Content Include="assets\semantic-ui\dist\components\form.js" />
+    <Content Include="assets\semantic-ui\dist\components\form.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\form.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\grid.css" />
+    <Content Include="assets\semantic-ui\dist\components\grid.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\header.css" />
+    <Content Include="assets\semantic-ui\dist\components\header.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\icon.css" />
+    <Content Include="assets\semantic-ui\dist\components\icon.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\image.css" />
+    <Content Include="assets\semantic-ui\dist\components\image.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\input.css" />
+    <Content Include="assets\semantic-ui\dist\components\input.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\item.css" />
+    <Content Include="assets\semantic-ui\dist\components\item.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\label.css" />
+    <Content Include="assets\semantic-ui\dist\components\label.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\list.css" />
+    <Content Include="assets\semantic-ui\dist\components\list.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\loader.css" />
+    <Content Include="assets\semantic-ui\dist\components\loader.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\menu.css" />
+    <Content Include="assets\semantic-ui\dist\components\menu.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\message.css" />
+    <Content Include="assets\semantic-ui\dist\components\message.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\modal.css" />
+    <Content Include="assets\semantic-ui\dist\components\modal.js" />
+    <Content Include="assets\semantic-ui\dist\components\modal.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\modal.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\nag.css" />
+    <Content Include="assets\semantic-ui\dist\components\nag.js" />
+    <Content Include="assets\semantic-ui\dist\components\nag.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\nag.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\popup.css" />
+    <Content Include="assets\semantic-ui\dist\components\popup.js" />
+    <Content Include="assets\semantic-ui\dist\components\popup.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\popup.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\progress.css" />
+    <Content Include="assets\semantic-ui\dist\components\progress.js" />
+    <Content Include="assets\semantic-ui\dist\components\progress.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\progress.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\rail.css" />
+    <Content Include="assets\semantic-ui\dist\components\rail.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\rating.css" />
+    <Content Include="assets\semantic-ui\dist\components\rating.js" />
+    <Content Include="assets\semantic-ui\dist\components\rating.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\rating.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\reset.css" />
+    <Content Include="assets\semantic-ui\dist\components\reset.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\reveal.css" />
+    <Content Include="assets\semantic-ui\dist\components\reveal.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\search.css" />
+    <Content Include="assets\semantic-ui\dist\components\search.js" />
+    <Content Include="assets\semantic-ui\dist\components\search.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\search.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\segment.css" />
+    <Content Include="assets\semantic-ui\dist\components\segment.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\shape.css" />
+    <Content Include="assets\semantic-ui\dist\components\shape.js" />
+    <Content Include="assets\semantic-ui\dist\components\shape.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\shape.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\sidebar.css" />
+    <Content Include="assets\semantic-ui\dist\components\sidebar.js" />
+    <Content Include="assets\semantic-ui\dist\components\sidebar.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\sidebar.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\site.css" />
+    <Content Include="assets\semantic-ui\dist\components\site.js" />
+    <Content Include="assets\semantic-ui\dist\components\site.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\site.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\state.js" />
+    <Content Include="assets\semantic-ui\dist\components\state.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\statistic.css" />
+    <Content Include="assets\semantic-ui\dist\components\statistic.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\step.css" />
+    <Content Include="assets\semantic-ui\dist\components\step.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\sticky.css" />
+    <Content Include="assets\semantic-ui\dist\components\sticky.js" />
+    <Content Include="assets\semantic-ui\dist\components\sticky.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\sticky.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\tab.css" />
+    <Content Include="assets\semantic-ui\dist\components\tab.js" />
+    <Content Include="assets\semantic-ui\dist\components\tab.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\tab.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\table.css" />
+    <Content Include="assets\semantic-ui\dist\components\table.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\transition.css" />
+    <Content Include="assets\semantic-ui\dist\components\transition.js" />
+    <Content Include="assets\semantic-ui\dist\components\transition.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\transition.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\video.css" />
+    <Content Include="assets\semantic-ui\dist\components\video.js" />
+    <Content Include="assets\semantic-ui\dist\components\video.min.css" />
+    <Content Include="assets\semantic-ui\dist\components\video.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\visibility.js" />
+    <Content Include="assets\semantic-ui\dist\components\visibility.min.js" />
+    <Content Include="assets\semantic-ui\dist\components\visit.js" />
+    <Content Include="assets\semantic-ui\dist\components\visit.min.js" />
+    <Content Include="assets\semantic-ui\dist\semantic.css" />
+    <Content Include="assets\semantic-ui\dist\semantic.js" />
+    <Content Include="assets\semantic-ui\dist\semantic.min.css" />
+    <Content Include="assets\semantic-ui\dist\semantic.min.js" />
+    <Content Include="assets\semantic-ui\dist\themes\basic\assets\fonts\icons.svg" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\fonts\icons.svg" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\images\flags.png" />
+    <Content Include="assets\semantic-ui\dist\themes\github\assets\fonts\octicons.svg" />
+    <Content Include="assets\semantic-ui\dist\themes\material\assets\fonts\icons.svg" />
+    <Content Include="assets\semantic-ui\package.js" />
+    <Content Include="assets\semantic-ui\semantic.css" />
+    <Content Include="assets\semantic-ui\semantic.js" />
+    <Content Include="assets\semantic-ui\semantic.min.css" />
+    <Content Include="assets\semantic-ui\semantic.min.js" />
+    <Content Include="assets\semantic-ui\themes\default\assets\fonts\icons.svg" />
+    <Content Include="assets\semantic-ui\themes\default\assets\images\flags.png" />
+    <Content Include="cmake\CMakeLists.txt" />
+    <Content Include="cmake\docs\cmake入门.html" />
+    <Content Include="cmake\source\inc\cmake.h" />
+    <Content Include="cmake\source\src\cmake.c" />
+    <Content Include="cmake\source\src\main.c" />
+    <Content Include="frame_blog.html" />
+    <Content Include="index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="svc\menu.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="svc\blog.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cmake\CMakeLists.demo" />
+    <Content Include="cmake\docs\cmake入门.md" />
+    <Content Include="cmake\docs\cmake命令调用方式.md" />
+    <Content Include="cmake\docs\在cmake里引用外部库文件.md" />
+    <Content Include="cmake\Makefile" />
+    <Content Include="linux\docs\shell\shell_manual.md" />
+    <Content Include="linux\source\shell\if.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\semantic-ui\.versions" />
+    <Content Include="assets\semantic-ui\dist\themes\basic\assets\fonts\icons.eot" />
+    <Content Include="assets\semantic-ui\dist\themes\basic\assets\fonts\icons.ttf" />
+    <Content Include="assets\semantic-ui\dist\themes\basic\assets\fonts\icons.woff" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\fonts\icons.eot" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\fonts\icons.otf" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\fonts\icons.woff" />
+    <Content Include="assets\semantic-ui\dist\themes\default\assets\fonts\icons.woff2" />
+    <Content Include="assets\semantic-ui\dist\themes\github\assets\fonts\octicons-local.ttf" />
+    <Content Include="assets\semantic-ui\dist\themes\github\assets\fonts\octicons.ttf" />
+    <Content Include="assets\semantic-ui\dist\themes\github\assets\fonts\octicons.woff" />
+    <Content Include="assets\semantic-ui\dist\themes\material\assets\fonts\icons.eot" />
+    <Content Include="assets\semantic-ui\dist\themes\material\assets\fonts\icons.ttf" />
+    <Content Include="assets\semantic-ui\dist\themes\material\assets\fonts\icons.woff" />
+    <Content Include="assets\semantic-ui\dist\themes\material\assets\fonts\icons.woff2" />
+    <Content Include="assets\semantic-ui\LICENSE" />
+    <Content Include="assets\semantic-ui\package.json" />
+    <Content Include="assets\semantic-ui\README.md" />
+    <Content Include="assets\semantic-ui\themes\default\assets\fonts\icons.eot" />
+    <Content Include="assets\semantic-ui\themes\default\assets\fonts\icons.otf" />
+    <Content Include="assets\semantic-ui\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="assets\semantic-ui\themes\default\assets\fonts\icons.woff" />
+    <Content Include="assets\semantic-ui\themes\default\assets\fonts\icons.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="deploy.bat" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>21150</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8888/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
