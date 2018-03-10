@@ -27,7 +27,9 @@ var blogInit = function () {
 
     // 绑定界面
     $('.ui.accordion').accordion({ "exclusive": false });
-    ko.applyBindings({ categories: menuList }, document.getElementById("blog_menu"));
+    //$('.button').popup();
+    
+    ko.applyBindings({ menus: menuList }, document.getElementById("blog_menu"));
 
     // 初始化数据
     database.queryBlogMenus(function (menus) {

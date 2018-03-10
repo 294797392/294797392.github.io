@@ -62,6 +62,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\image.png" />
     <Content Include="assets\javascripts\jquery.js" />
     <Content Include="assets\javascripts\knockout.js" />
     <Content Include="assets\javascripts\markdown.js" />
