@@ -58,7 +58,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\javascripts\vms\" />
     <Folder Include="assets\styles\" />
     <Folder Include="Properties\" />
   </ItemGroup>
@@ -66,7 +65,8 @@
     <Content Include="assets\javascripts\jquery.js" />
     <Content Include="assets\javascripts\knockout.js" />
     <Content Include="assets\javascripts\markdown.js" />
-    <Content Include="assets\javascripts\render.js" />
+    <Content Include="assets\javascripts\database.js" />
+    <Content Include="assets\javascripts\vms\app.js" />
     <Content Include="assets\semantic-ui\components\accordion.css" />
     <Content Include="assets\semantic-ui\components\accordion.js" />
     <Content Include="assets\semantic-ui\components\accordion.min.css" />

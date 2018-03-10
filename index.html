@@ -5,20 +5,23 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-		<script type="text/javascript" src="js/jquery.js"></script>
-		
-        <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/reset.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/site.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/container.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/grid.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/header.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/image.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/menu.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/divider.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/list.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/segment.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/dropdown.css">
-		<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS/dist/components/icon.css">
+        <script type="text/javascript" src="assets/javascripts/jquery.js"></script>
+        <script type="text/javascript" src="assets/javascripts/knockout.js"></script>
+        <script type="text/javascript" src="assets/javascripts/database.js"></script>
+        <script type="text/javascript" src="assets/javascripts/vms/app.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/reset.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/site.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/container.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/grid.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/header.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/image.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/divider.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/list.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/segment.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/dropdown.css">
+		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/icon.css">
 
 		<style type="text/css">
 			body { background-color: #FFFFFF;
@@ -41,27 +44,27 @@
 
 		<script type="text/javascript">
 
-			function init_iframe()
-			{
-				if(window.m_iframe == null)
-				{
-					window.m_iframe = document.getElementById("iframe");
-					window.m_iframe_document = window.m_iframe.document || window.m_iframe.contentWindow.document;
+			//function init_iframe()
+			//{
+			//	if(window.m_iframe == null)
+			//	{
+			//		window.m_iframe = document.getElementById("iframe");
+			//		window.m_iframe_document = window.m_iframe.document || window.m_iframe.contentWindow.document;
 
-					window.m_iframe.onload = function()
-					{
-						var iframe = window.m_iframe;
-						var document = window.m_iframe_document;
-						iframe.height = document.body.scrollHeight; // 网页正文高度
-					}
+			//		window.m_iframe.onload = function()
+			//		{
+			//			var iframe = window.m_iframe;
+			//			var document = window.m_iframe_document;
+			//			iframe.height = document.body.scrollHeight; // 网页正文高度
+			//		}
 
-					window.m_iframe.onload();
-				}
-			}
+			//		window.m_iframe.onload();
+			//	}
+			//}
 
 			window.onload = function()
 			{
-				init_iframe();
+			    app_init();
 			};
 		</script>
 
@@ -75,16 +78,20 @@
 					<img class="logo" src="assets/images/logo.png">
 					Project Name
 				</a>
-			  <a href="#" class="item"><i class="icon home"></i>主页</a>
+                <!-- ko foreach: menus -->
+                <a href="#" class="item"><i class="icon home"></i><!--ko text: title--><!--/ko--></a>
+                <!-- /ko -->
+
+			  <!--<a href="#" class="item"><i class="icon home"></i>主页</a>
 			  <a href="#" class="item active"><i class="icon book"></i>技术博客</a>
-			  <a href="#" class="item"><i class="icon photo"></i>相册</a>
+			  <a href="#" class="item"><i class="icon photo"></i>相册</a>-->
 			</div>
 	  	</div>
 	  
 	<div class="ui main container">
-		<iframe id="iframe" width="100%" frameborder="0" src="frame_blog.html">
+		<!--<iframe id="iframe" width="100%" frameborder="0" src="frame_blog.html">
 			
-		</iframe>
+		</iframe>-->
 	</div>
 		
     </body>
