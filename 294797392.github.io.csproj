@@ -66,7 +66,7 @@
     <Content Include="assets\javascripts\knockout.js" />
     <Content Include="assets\javascripts\markdown.js" />
     <Content Include="assets\javascripts\database.js" />
-    <Content Include="assets\javascripts\vms\app.js" />
+    <Content Include="assets\javascripts\app.js" />
     <Content Include="assets\semantic-ui\components\accordion.css" />
     <Content Include="assets\semantic-ui\components\accordion.js" />
     <Content Include="assets\semantic-ui\components\accordion.min.css" />
@@ -372,10 +372,7 @@
     <Content Include="index.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="svc\menu.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="svc\blog.json" />
+    <Content Include="svc\mainMenu.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="cmake\CMakeLists.demo" />
@@ -414,6 +411,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="deploy.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="svc\blogMenu.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

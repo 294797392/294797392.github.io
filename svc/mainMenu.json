@@ -1,0 +1,14 @@
+﻿[
+  {
+    "title": "主页",
+    "icon": "home"
+  },
+  {
+    "title": "技术博客",
+    "icon": "book"
+  },
+  {
+    "title": "相册",
+    "icon": "photo"
+  }
+]

@@ -1,99 +1,131 @@
 ﻿<html>
-    <head>
-        <title></title>
-		<meta charset="utf-8"/>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        <script type="text/javascript" src="assets/javascripts/jquery.js"></script>
-        <script type="text/javascript" src="assets/javascripts/knockout.js"></script>
-        <script type="text/javascript" src="assets/javascripts/database.js"></script>
-        <script type="text/javascript" src="assets/javascripts/vms/app.js"></script>
+    <script type="text/javascript" src="assets/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="assets/semantic-ui/semantic.min.js"></script>
+    <script type="text/javascript" src="assets/javascripts/knockout.js"></script>
+    <script type="text/javascript" src="assets/javascripts/database.js"></script>
+    <script type="text/javascript" src="assets/javascripts/app.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/reset.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/site.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/container.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/grid.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/header.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/image.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/menu.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/divider.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/list.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/segment.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/dropdown.css">
-		<link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/site.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/container.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/header.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/image.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/menu.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/list.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/dist/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/components/accordion.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/semantic-ui/components/accordion.min.js">
 
-		<style type="text/css">
-			body { background-color: #FFFFFF;
-			}
-			.ui.menu .item img.logo {
-				margin-right: 1.5em;
-			}
-			.main.container {
-				margin-top: 7em;
-			}
-			.wireframe {
-				margin-top: 2em;
-			}
-			.ui.footer.segment {
-				margin: 5em 0em 0em;
-				padding: 5em 0em;
-			}
-			.logo{width:25px;height:25px; border:none; padding:none; margin:none;}
-		</style>
+    <style type="text/css">
+        body
+        {
+            background-color: #FFFFFF;
+        }
 
-		<script type="text/javascript">
+        .ui.menu .item img.logo
+        {
+            margin-right: 1.5em;
+        }
 
-			//function init_iframe()
-			//{
-			//	if(window.m_iframe == null)
-			//	{
-			//		window.m_iframe = document.getElementById("iframe");
-			//		window.m_iframe_document = window.m_iframe.document || window.m_iframe.contentWindow.document;
+        .main.container
+        {
+            margin-top: 7em;
+        }
 
-			//		window.m_iframe.onload = function()
-			//		{
-			//			var iframe = window.m_iframe;
-			//			var document = window.m_iframe_document;
-			//			iframe.height = document.body.scrollHeight; // 网页正文高度
-			//		}
+        .wireframe
+        {
+            margin-top: 2em;
+        }
 
-			//		window.m_iframe.onload();
-			//	}
-			//}
+        .ui.footer.segment
+        {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
 
-			window.onload = function()
-			{
-			    app_init();
-			};
-		</script>
+        .logo
+        {
+            width: 25px;
+            height: 25px;
+            border: none;
+            padding: none;
+            margin: none;
+        }
+    </style>
 
-    </head>
+    <script type="text/javascript">
 
-    <body>
+        //function init_iframe()
+        //{
+        //	if(window.m_iframe == null)
+        //	{
+        //		window.m_iframe = document.getElementById("iframe");
+        //		window.m_iframe_document = window.m_iframe.document || window.m_iframe.contentWindow.document;
 
-		<div class="ui borderless menu fixed">
-			<div class="ui container">
-				<a href="#" class="header item">
-					<img class="logo" src="assets/images/logo.png">
-					Project Name
-				</a>
-                <!-- ko foreach: menus -->
-                <a href="#" class="item"><i class="icon home"></i><!--ko text: title--><!--/ko--></a>
-                <!-- /ko -->
+        //		window.m_iframe.onload = function()
+        //		{
+        //			var iframe = window.m_iframe;
+        //			var document = window.m_iframe_document;
+        //			iframe.height = document.body.scrollHeight; // 网页正文高度
+        //		}
 
-			  <!--<a href="#" class="item"><i class="icon home"></i>主页</a>
-			  <a href="#" class="item active"><i class="icon book"></i>技术博客</a>
-			  <a href="#" class="item"><i class="icon photo"></i>相册</a>-->
-			</div>
-	  	</div>
-	  
-	<div class="ui main container">
-		<!--<iframe id="iframe" width="100%" frameborder="0" src="frame_blog.html">
-			
-		</iframe>-->
-	</div>
-		
-    </body>
+        //		window.m_iframe.onload();
+        //	}
+        //}
+
+        window.onload = function () {
+            appInit();
+            blogInit();
+        };
+    </script>
+
+</head>
+
+<body>
+
+    <div class="ui borderless menu fixed">
+        <div id="main_menu" class="ui container">
+            <a href="#" class="header item">
+                <img class="logo" src="assets/images/logo.png">
+                Project Name
+            </a>
+            <!-- ko foreach: menus -->
+            <a href="#" class="item"><i class="icon" data-bind="css:icon"></i><!--ko text: title--><!--/ko--></a>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <div class="ui main container">
+        <div class="ui grid">
+            <div class="three wide column">
+                <div id="blog_menu" class="ui accordion" data-bind="foreach:categories">
+                    <div class="title"><i class="dropdown icon"></i><!--ko text: title--><!--/ko--></div>
+                    <div class="content">
+                        <div class="ui link list" style="margin-left:40px;" data-bind="foreach:child">
+                            <a class="item"><!--ko text: title--><!--/ko--></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="thirteen wide column" style="background:red;">
+                <div class="ui container">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
 
 </html>

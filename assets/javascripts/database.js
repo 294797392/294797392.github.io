@@ -1,20 +1,27 @@
-﻿
+﻿/// <reference path="jquery.js"/>
 
-/// <reference path="jquery.js"/>
+//var database_url = "http://localhost:8888/";
+var svc_root_url = "https://294797392.github.io/svc/"
 
-
-var database_url = "http://localhost:8888/";
+function doQuery(url, callback)
+{
+    $.ajax({
+        url: svc_root_url + url,
+        success: function (data, textStatus, jqXHR) {
+            if (callback) {
+                //var menus = JSON.parse(data);
+                callback(data);
+            }
+        }
+    });
+}
 
 var database = {
-    get_menu_list: function (callback) {
-        $.ajax({
-            url: database_url + "svc/menu.json",
-            success: function (data, textStatus, jqXHR) {
-                if (callback) {
-                    //var menus = JSON.parse(data);
-                    callback(data);
-                }
-            }
-        });
+    queryMainMenus: function (callback) {
+        doQuery("mainMenu.json", callback);
+    },
+
+    queryBlogMenus: function (callback) {
+        doQuery("blogMenu.json", callback)
     }
 };
