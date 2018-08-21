@@ -1,3 +1,10 @@
 {
-    "C_Cpp.dimInactiveRegions": true
+    "C_Cpp.dimInactiveRegions": true,
+    "files.associations": {
+        "types.h": "c",
+        "istream": "c",
+        "mplayer.h": "c",
+        "stdio.h": "c",
+        "cerrno": "c"
+    }
 }

@@ -22,6 +22,9 @@
 #define MPLAYER_PATH "D:/MPlayer/mplayer/mplayer.exe"
 #else
 #define MPLAYER_PATH "mplayer"
+typedef int BOOL;
+#define FALSE 0
+#define TRUE 1
 #endif
 #define DEFAULT_SOURCE_SIZE 1024
 #define MP_SAFE_FREE(FUNC, PTR) if(PTR) { FUNC(*PTR); *PTR = NULL; }
@@ -44,7 +47,6 @@ typedef enum tagMPEVENT
 {
 	MPEVT_STATUS_CHANGED
 }mplayer_event_enum;
-typedef int(*mp_event_listener)(mplayer_event_enum evt, void *data);
 
 /* 播放器状态 */
 typedef enum tagMPSTATUS
@@ -57,7 +59,10 @@ typedef enum tagMPSTATUS
 /* 不同平台下的播放器内部对象指针 */
 typedef struct tagMPLAYER_PRIV mplayer_priv_t;
 
+/* 播放器句柄 */
 typedef struct tagMPLAYER mplayer_t;
+
+/* 不同平台下相同的播放器操作 */
 typedef struct tagMPLAYER_OPS mplayer_ops_t;
 
 /* 播放器实例 */
@@ -69,6 +74,8 @@ struct tagMPLAYER{
 	mplayer_priv_t *priv;
 	mplayer_ops_t *ops;
 };
+
+typedef int(*mp_event_listener)(mplayer_event_enum evt, void *data);
 
 /* 封装不同平台下，对播放器所执行的相同的操作 */
 struct tagMPLAYER_OPS
