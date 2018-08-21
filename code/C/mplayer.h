@@ -33,9 +33,11 @@
 #define VOLUME_DELTA 10
 
 /* 返回值 */
+#define MP_FAILED -1
 #define MP_SUCCESS 0
 #define MP_CREATE_PROCESS_FAILED 1
 #define MP_SEND_COMMAND_FAILED 2
+#define MP_READ_DATA_FAILED 3
 
 /* 播放器事件类型定义 */
 typedef enum tagMPEVENT
@@ -85,6 +87,9 @@ struct tagMPLAYER_OPS
 
 	/* 向mplayer播放进程发送消息 */
 	int(*mpops_send_command)(mplayer_t *mp, const char *cmd, int size);
+
+	/* 从mplayer进程读取数据 */
+	int(*mpops_read_data)(mplayer_t *mp, char *buff, int size);
 };
 
 mplayer_t* mplayer_create_instance();
@@ -96,6 +101,10 @@ int mplayer_pause(mplayer_t *mp);
 int mplayer_resume(mplayer_t *mp);
 void mplayer_increase_volume(mplayer_t *mp);
 void mplayer_decrease_volume(mplayer_t *mp);
+/* 返回总时长，以秒为单位 */
+int mplayer_get_duration(mplayer_t *mp);
+/* 返回当前播放进度，以秒为单位 */
+int mplayer_get_position(mplayer_t *mp);
 void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener);
 
 #endif

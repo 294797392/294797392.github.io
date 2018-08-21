@@ -136,6 +136,21 @@ int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
 	}
 }
 
+/* ��mplayer���̶�ȡ���� */
+int mpops_read_data(mplayer_t *mp, char *buff, int size)
+{
+	DWORD dwRead;
+	if (ReadFile(mp->priv->hRead, buff, size, &dwRead, NULL) == FALSE)
+	{
+		fprintf(stdout, "read data error, last error:%u\n", GetLastError());
+		return MP_READ_DATA_FAILED;
+	}
+	else
+	{
+		return MP_SUCCESS;
+	}
+}
+
 #else
 
 struct tagMPLAYER_PRIV {
@@ -144,7 +159,7 @@ struct tagMPLAYER_PRIV {
 	pid_t pid;
 };
 
-/* 打开mplayer播放进程并开始播放 */
+/* 打开mplayer播放进程并开始播�?*/
 int mpops_open_player_process(mplayer_t *mp)
 {
 	int pipe1[2], pipe2[2];
@@ -212,7 +227,7 @@ void mpops_close_player_process(mplayer_t *mp)
 	}
 }
 
-/* 释放mplayer进程所占用的资源 */
+/* 释放mplayer进程所占用的资�?*/
 void mpops_release_process_resource(mplayer_t *mp)
 {
 	close(mp->priv->fd_read);
@@ -221,7 +236,7 @@ void mpops_release_process_resource(mplayer_t *mp)
 	mp->priv->fd_write = 0;
 }
 
-/* 向mplayer播放进程发送消息 */
+/* 向mplayer播放进程发送消�?*/
 int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
 {
 	char command[64] = { '\0' };
@@ -247,8 +262,29 @@ static mplayer_ops_t ops_instance =
 	.mpops_wait_process_exit = mpops_wait_process_exit,
 	.mpops_close_player_process = mpops_close_player_process,
 	.mpops_release_process_resource = mpops_release_process_resource,
-	.mpops_send_command = mpops_send_command
+	.mpops_send_command = mpops_send_command,
+	.mpops_read_data = mpops_read_data
 };
+
+
+static BOOL parse_key_value_pair(const char *kvpair, char splitter, char *key, int key_size, char *value, int value_max_size)
+{
+	int cnt = strlen(kvpair);
+	for (int i = 0; i < cnt; i++)
+	{
+		if (kvpair[i] == splitter)
+		{
+			if (i > key_size || cnt - i > value_max_size)
+			{
+				return FALSE;
+			}
+			strncpy(key, kvpair, i);
+			strncpy(value, kvpair + i + 1, cnt - i);
+			break;
+		}
+	}
+	return TRUE;
+}
 
 void* mplayer_monitor_thread_process(void* userdata)
 {
@@ -262,6 +298,54 @@ void* mplayer_monitor_thread_process(void* userdata)
 		mp->event_listener(MPEVT_STATUS_CHANGED, (void*)MPSTAT_STOPPED);
 	}
 	return NULL;
+}
+
+int mplayer_read(mplayer_t *mp, const char *substr, char *buff, int size)
+{
+	char line[1024] = { '\0' };
+	while (1)
+	{
+		char c[1] = { '\0' };
+		int ret = mp->ops->mpops_read_data(mp, c, 1);
+		if (ret != MP_SUCCESS)
+		{
+			fprintf(stdout, "read error from mplayer, code:%d\n", ret);
+			return ret;
+		}
+		if (c[0] == '\n')
+		{
+			if (strstr(line, substr))
+			{
+				strncpy(buff, line, size);
+				return MP_SUCCESS;
+			}
+
+			memset(line, 0, sizeof(line));
+			continue;
+		}
+
+		if (c[0] != '\r')
+		{
+			strncat(line, c, 1);
+		}
+	}
+}
+
+void mplayer_retrive_media_info(mplayer_t *mp, const char *retrive_cmd, const char *info_key, char *value_buf, int buf_size)
+{
+	if (mp->ops->mpops_send_command(mp, retrive_cmd, strlen(retrive_cmd)) != MP_SUCCESS)
+	{
+		return MP_SEND_COMMAND_FAILED;
+	}
+
+	char result[1024] = { '\0' };
+	if (mplayer_read(mp, info_key, result, sizeof(result)) != MP_SUCCESS)
+	{
+		return MP_READ_DATA_FAILED;
+	}
+
+	char key[128] = { '\0' };
+	parse_key_value_pair(result, '=', key, sizeof(key), value_buf, buf_size);
 }
 
 mplayer_t* mplayer_create_instance()
@@ -338,6 +422,61 @@ void mplayer_decrease_volume(mplayer_t *mp)
 		snprintf(cmd, sizeof(cmd), "volume %i 1", mp->volume);
 		mp->ops->mpops_send_command(mp, cmd, strlen(cmd));
 	}
+}
+
+int mplayer_get_duration(mplayer_t *mp)
+{
+	char duration[128] = { '\0' };
+	mplayer_retrive_media_info(mp, "get_time_length", "ANS_LENGTH", duration, sizeof(duration));
+	return strlen(duration) == 0 ? -1 : atoi(duration);
+
+	//const char *get_duration_cmd = "get_time_length";
+	//if (mp->ops->mpops_send_command(mp, get_duration_cmd, strlen(get_duration_cmd)) != MP_SUCCESS)
+	//{
+	//	return MP_SEND_COMMAND_FAILED;
+	//}
+
+	//char result[1024] = { '\0' };
+	//if (mplayer_read(mp, "ANS_LENGTH=", result, sizeof(result)) != MP_SUCCESS)
+	//{
+	//	return MP_READ_DATA_FAILED;
+	//}
+
+	//char key[128] = { '\0' };
+	//parse_key_value_pair(result, '=', key, sizeof(key), value, sizeof(value));
+	//if (strlen(value) == 0 || strlen(key) == 0)
+	//{
+	//	return MP_FAILED;
+	//}
+	//return atoi(value);
+}
+
+int mplayer_get_position(mplayer_t *mp)
+{
+	char position[128] = { '\0' };
+	mplayer_retrive_media_info(mp, "get_time_pos", "ANS_TIME_POSITION", position, sizeof(position));
+	return strlen(position) == 0 ? -1 : atoi(position);
+
+	//const char *get_position_cmd = "get_time_pos";
+	//if (mp->ops->mpops_send_command(mp, get_position_cmd, strlen(get_position_cmd)) != MP_SUCCESS)
+	//{
+	//	return MP_SEND_COMMAND_FAILED;
+	//}
+
+	//char result[1024] = { '\0' };
+	//if (mplayer_read(mp, "ANS_TIME_POSITION=", result, sizeof(result)) != MP_SUCCESS)
+	//{
+	//	return MP_READ_DATA_FAILED;
+	//}
+
+	//char key[128] = { '\0' };
+	//char value[128] = { '\0' };
+	//parse_key_value_pair(result, '=', key, sizeof(key), value, sizeof(value));
+	//if (strlen(value) == 0 || strlen(key) == 0)
+	//{
+	//	return MP_FAILED;
+	//}
+	//return atoi(value);
 }
 
 void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener)
