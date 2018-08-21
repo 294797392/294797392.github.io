@@ -4,6 +4,7 @@
 #ifdef WINDOWS
 #include <Windows.h>
 #else
+#include <unistd.h>
 #endif
 
 #include "mplayer.h"
@@ -16,8 +17,6 @@ int main(int argc, char *argv[])
 	mplayer_open(mp, source, strlen(source));
 	mplayer_play(mp);
 
-	char c;
-	scanf(&c);
-
+	while(1){}
 	return 0;
 }

@@ -4,6 +4,12 @@
 #ifdef WINDOWS
 #include <windows.h>
 #else
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <errno.h>
+#include <signal.h>
 #endif
 
 #include "mplayer.h"
@@ -72,7 +78,7 @@ int mpops_open_player_process(mplayer_t *mp)
 		&siStartInfo,       // STARTUPINFO pointer 
 		&piProcInfo))       // receives PROCESS_INFORMATION
 	{
-		fprintf(stdout, "create process fail:%u", GetLastError());
+		fprintf(stdout, "create process fail:%u\n", GetLastError());
 		goto freepipe;
 	}
 
@@ -121,7 +127,7 @@ int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
 	DWORD dwWritten;
 	if (WriteFile(mp->priv->hWrite, command, strlen(command), &dwWritten, NULL) == FALSE)
 	{
-		fprintf(stdout, "send %s error, last error:%u", cmd, GetLastError());
+		fprintf(stdout, "send %s error, last error:%u\n", cmd, GetLastError());
 		return MP_SEND_COMMAND_FAILED;
 	}
 	else
@@ -131,7 +137,108 @@ int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
 }
 
 #else
-struct tagMHANDLE {};
+
+struct tagMPLAYER_PRIV {
+	int fd_write;
+	int fd_read;
+	pid_t pid;
+};
+
+/* 打开mplayer播放进程并开始播放 */
+int mpops_open_player_process(mplayer_t *mp)
+{
+	int pipe1[2], pipe2[2];
+	if(pipe(pipe1) < 0 || pipe(pipe2) < 0)
+	{
+		fprintf(stdout, "create pipe failed, errno:%d\n", errno);
+		return MP_CREATE_PROCESS_FAILED;
+	}
+
+	pid_t pid = fork();
+	if(pid > 0)
+	{
+		mp->priv->fd_read = pipe1[0];
+		close(pipe1[1]);
+		mp->priv->fd_write = pipe2[1];
+		close(pipe2[0]);
+	}
+	else if(pid == 0)
+	{
+		/* mplayer process */
+		close(pipe1[0]);
+		close(pipe2[1]);
+		dup2(pipe1[1], STDOUT_FILENO);
+		dup2(pipe2[0], STDIN_FILENO);
+		char *argv[5] = { MPLAYER_PATH, "-slave", "-quiet", mp->source, NULL };
+		if(execvp(MPLAYER_PATH, argv) == -1)
+		{
+			fprintf(stdout, "load mplayer image failed, errno:%d\n", errno);
+			return MP_CREATE_PROCESS_FAILED;
+		}
+	}
+	else if(pid == -1)
+	{
+		fprintf(stdout, "fork mplayer process failed, errno:%d\n", errno);
+		return MP_CREATE_PROCESS_FAILED;
+	}
+
+	return MP_SUCCESS;
+}
+
+/* 等待mplayer播放进程结束 */
+int mpops_wait_process_exit(mplayer_t *mp)
+{
+	int exit_status;
+	if(waitpid(mp->priv->pid, &exit_status, 0) < 0)
+	{
+		if(errno == EINTR)
+		{
+			fprintf(stdout, "receive EINTR signal\n");
+		}
+		else
+		{
+			fprintf(stdout, "waitpid failed, errno:%d\n", errno);
+		}
+	}
+	return 1;
+}
+
+/* 关闭进程 */
+void mpops_close_player_process(mplayer_t *mp)
+{
+	if(kill(mp->priv->pid, SIGKILL) == -1)
+	{
+		fprintf(stdout, "kill mplayer process failed, errno:%d\n", errno);
+	}
+}
+
+/* 释放mplayer进程所占用的资源 */
+void mpops_release_process_resource(mplayer_t *mp)
+{
+	close(mp->priv->fd_read);
+	close(mp->priv->fd_write);
+	mp->priv->fd_read = 0;
+	mp->priv->fd_write = 0;
+}
+
+/* 向mplayer播放进程发送消息 */
+int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
+{
+	char command[64] = { '\0' };
+	strncpy(command, cmd, sizeof(command));
+	strncat(command, "\n", 1);
+
+	if(write(mp->priv->fd_write, command, strlen(command)) == -1)
+	{
+		fprintf(stdout, "send %s error, errno:%d\n", cmd, errno);
+		return MP_SEND_COMMAND_FAILED;
+	}
+	else
+	{
+		return MP_SUCCESS;
+	}
+}
+
 #endif
 
 static mplayer_ops_t ops_instance =
@@ -152,7 +259,7 @@ void* mplayer_monitor_thread_process(void* userdata)
 	mp->ops->mpops_release_process_resource(mp);
 	if (mp->event_listener)
 	{
-		mp->event_listener(MPEVT_STATUS_CHANGED, MPSTAT_STOPPED);
+		mp->event_listener(MPEVT_STATUS_CHANGED, (void*)MPSTAT_STOPPED);
 	}
 	return NULL;
 }
@@ -218,7 +325,7 @@ void mplayer_increase_volume(mplayer_t *mp)
 
 		char cmd[128] = { '\0' };
 		snprintf(cmd, sizeof(cmd), "volume %i 1", mp->volume);
-		return mp->ops->mpops_send_command(mp, cmd, strlen(cmd));
+		mp->ops->mpops_send_command(mp, cmd, strlen(cmd));
 	}
 }
 
@@ -229,7 +336,7 @@ void mplayer_decrease_volume(mplayer_t *mp)
 
 		char cmd[128] = { '\0' };
 		snprintf(cmd, sizeof(cmd), "volume %i 1", mp->volume);
-		return mp->ops->mpops_send_command(mp, cmd, strlen(cmd));
+		mp->ops->mpops_send_command(mp, cmd, strlen(cmd));
 	}
 }
 
