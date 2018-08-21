@@ -1,27 +1,101 @@
 #ifndef __MPLAYER_H__
 #define __MPLAYER_H__
 
-typedef enum tagMPLAYER_STATUS
+/*
+ * 正常情况下，播放器进程有以下几种退出方式：
+ * 1.歌曲播放结束，自动退出
+ *		是否通知：是
+ * 2.手动调用stop退出
+ *		是否通知：否
+ * 3.向进程发送stop命令退出
+ *		是否通知：否
+ */
+
+#ifdef WINDOWS
+#define HAVE_STRUCT_TIMESPEC		/* 解决引用pthread头文件编译不过的问题（“timespec” : “struct”类型重定义） */
+#pragma comment(lib, "pthreadVC2.lib") /* 连接pthread库 */
+#endif
+
+#include <pthread.h>
+
+#ifdef WINDOWS
+#define MPLAYER_PATH "D:/MPlayer/mplayer/mplayer.exe"
+#else
+#define MPLAYER_PATH "mplayer"
+#endif
+#define DEFAULT_SOURCE_SIZE 1024
+#define MP_SAFE_FREE(FUNC, PTR) if(PTR) { FUNC(*PTR); *PTR = NULL; }
+
+/* 音量相关常量 */
+#define VOLUME_DEFAULT 70
+#define VOLUME_MAX 100
+#define VOLUME_MIN 0
+#define VOLUME_DELTA 10
+
+/* 返回值 */
+#define MP_SUCCESS 0
+#define MP_CREATE_PROCESS_FAILED 1
+#define MP_SEND_COMMAND_FAILED 2
+
+/* 播放器事件类型定义 */
+typedef enum tagMPEVENT
 {
-    MSTATUS_IDLE = 0,
-    MSTATUS_PLAYING,
-    MSTATUS_PAUSED
+	MPEVT_STATUS_CHANGED
+}mplayer_event_enum;
+typedef int(*mp_event_listener)(mplayer_event_enum evt, void *data);
+
+/* 播放器状态 */
+typedef enum tagMPSTATUS
+{
+    MPSTAT_PLAYING,
+    MPSTAT_PAUSED,
+	MPSTAT_STOPPED
 }mplayer_status_enum;
 
-#define MP_SUCCESS 0
+/* 不同平台下的播放器内部对象指针 */
+typedef struct tagMPLAYER_PRIV mplayer_priv_t;
 
-typedef struct tagMPRIV mpriv_t;
-typedef struct tagMPLAYER 
+typedef struct tagMPLAYER mplayer_t;
+typedef struct tagMPLAYER_OPS mplayer_ops_t;
+
+/* 播放器实例 */
+struct tagMPLAYER{
+	char source[DEFAULT_SOURCE_SIZE];
+	int volume;
+	mp_event_listener event_listener;
+	pthread_t monitor_thread;
+	mplayer_priv_t *priv;
+	mplayer_ops_t *ops;
+};
+
+/* 封装不同平台下，对播放器所执行的相同的操作 */
+struct tagMPLAYER_OPS
 {
-    mpriv_t *priv;
-    mplayer_status_enum status;
-    int progress;
-    void(*open)(mplayer_t *mplayer, const char *source);
-    void(*close)(mplayer_t *mplayer);
-    int(*play)(mplayer_t *mplayer);
-    int(*stop)(mplayer_t *mplayer);
-    int(*pause)(mplayer_t *mplayer);
-    int(*resume)(mplayer_t *mplayer);
-} mplayer_t;
+	/* 打开mplayer播放进程并开始播放 */
+	int(*mpops_open_player_process)(mplayer_t *mp);
+
+	/* 等待mplayer播放进程结束 */
+	int(*mpops_wait_process_exit)(mplayer_t *mp);
+
+	/* 关闭进程 */
+	void(*mpops_close_player_process)(mplayer_t *mp);
+
+	/* 释放mplayer进程所占用的资源 */
+	void(*mpops_release_process_resource)(mplayer_t *mp);
+
+	/* 向mplayer播放进程发送消息 */
+	int(*mpops_send_command)(mplayer_t *mp, const char *cmd, int size);
+};
+
+mplayer_t* mplayer_create_instance();
+void mplayer_open(mplayer_t *mp, const char *source, int source_size);
+void mplayer_close(mplayer_t *mp);
+int mplayer_play(mplayer_t *mp);
+void mplayer_stop(mplayer_t *mp);
+int mplayer_pause(mplayer_t *mp);
+int mplayer_resume(mplayer_t *mp);
+void mplayer_increase_volume(mplayer_t *mp);
+void mplayer_decrease_volume(mplayer_t *mp);
+void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener);
 
 #endif

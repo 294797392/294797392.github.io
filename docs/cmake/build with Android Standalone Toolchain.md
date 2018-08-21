@@ -25,7 +25,7 @@
     安卓5.0以上要加上-fPIE选项
 
 ## 在Android原生程序里使用pthread的问题
-安卓工具链里，pthread相关的函数都在libc里，所以在编译的时候，不应该加target_link_libraries(android_program PRIVATE pthread)选项，不然会编译不过
+pthread相关的函数都在android bionic库里，安卓工具链会默认链接这个库，所以在编译的时候，不用在cmake里加target_link_libraries(android_program PRIVATE pthread)选项，不然会编译不过
 
 ## 参考
 https://developer.android.google.cn/ndk/guides/standalone_toolchain
