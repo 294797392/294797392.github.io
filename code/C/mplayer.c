@@ -322,7 +322,6 @@ int mplayer_read(mplayer_t *mp, const char *substr, char *buff, int size)
 		int ret = mp->ops->mpops_read_data(mp, c, 1);
 		if (ret != MP_SUCCESS)
 		{
-			fprintf(stdout, "read error from mplayer, code:%d\n", ret);
 			return ret;
 		}
 		if (c[0] == '\n')
