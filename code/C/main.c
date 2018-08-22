@@ -16,7 +16,7 @@ void test_mplayer()
 	mplayer_t *mp = mplayer_create_instance();
 	mplayer_open(mp, source, strlen(source));
 	mplayer_play(mp);
-	SLEEP(500);
+	SLEEP(2000);
 	int duration = mplayer_get_duration(mp);
 	fprintf(stdout, "duration:%d\n", duration);
 	while (1)
