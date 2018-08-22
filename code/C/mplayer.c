@@ -348,13 +348,13 @@ void mplayer_retrive_media_info(mplayer_t *mp, const char *retrive_cmd, const ch
 {
 	if (mp->ops->mpops_send_command(mp, retrive_cmd, strlen(retrive_cmd)) != MP_SUCCESS)
 	{
-		return MP_SEND_COMMAND_FAILED;
+		return;
 	}
 
 	char result[1024] = { '\0' };
 	if (mplayer_read(mp, info_key, result, sizeof(result)) != MP_SUCCESS)
 	{
-		return MP_READ_DATA_FAILED;
+		return;
 	}
 
 	char key[128] = { '\0' };

@@ -20,11 +20,13 @@
 
 #ifdef WINDOWS
 #define MPLAYER_PATH "D:/MPlayer/mplayer/mplayer.exe"
+#define SLEEP(dwMilliseconds) Sleep(dwMilliseconds)
 #else
 #define MPLAYER_PATH "mplayer"
 typedef int BOOL;
 #define FALSE 0
 #define TRUE 1
+#define SLEEP(dwMilliseconds) sleep(dwMilliseconds / 1000)
 #endif
 #define DEFAULT_SOURCE_SIZE 1024
 #define MP_SAFE_FREE(FUNC, PTR) if(PTR) { FUNC(*PTR); *PTR = NULL; }
@@ -56,6 +58,9 @@ typedef enum tagMPSTATUS
 	MPSTAT_STOPPED
 }mplayer_status_enum;
 
+/* mplayer事件回调 */
+typedef int(*mp_event_listener)(mplayer_event_enum evt, void *data);
+
 /* 不同平台下的播放器内部对象指针 */
 typedef struct tagMPLAYER_PRIV mplayer_priv_t;
 
@@ -75,7 +80,6 @@ struct tagMPLAYER{
 	mplayer_ops_t *ops;
 };
 
-typedef int(*mp_event_listener)(mplayer_event_enum evt, void *data);
 
 /* 封装不同平台下，对播放器所执行的相同的操作 */
 struct tagMPLAYER_OPS
