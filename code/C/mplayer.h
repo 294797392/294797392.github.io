@@ -24,8 +24,12 @@
 #else
 #define MPLAYER_PATH "mplayer"
 typedef int BOOL;
+#ifndef FALSE
 #define FALSE 0
+#endif
+#ifndef TRUE
 #define TRUE 1
+#endif
 #define SLEEP(dwMilliseconds) sleep(dwMilliseconds / 1000)
 #endif
 #define DEFAULT_SOURCE_SIZE 1024
@@ -105,6 +109,7 @@ struct tagMPLAYER_OPS
 };
 
 mplayer_t* mplayer_create_instance();
+void mplayer_free_instance(mplayer_t *mp);
 void mplayer_open(mplayer_t *mp, const char *source, int source_size);
 void mplayer_close(mplayer_t *mp);
 int mplayer_play(mplayer_t *mp);

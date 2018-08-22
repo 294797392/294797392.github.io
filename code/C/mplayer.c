@@ -376,6 +376,13 @@ mplayer_t* mplayer_create_instance()
 	return instance;
 }
 
+void mplayer_free_instance(mplayer_t *mp)
+{
+	mp->ops->mpops_close_player_process(mp);
+	mp->ops->mpops_release_process_resource(mp);
+	free(mp);
+}
+
 void mplayer_open(mplayer_t *mp, const char *source, int source_size)
 {
 	strncpy(mp->source, source, source_size);

@@ -5,6 +5,9 @@
 2.通过设定环境变量LD_LIBRARY_PATH也可以指定动态库搜索路径。当通过该环境变量指定多个动态库搜索路径时，路径之间用冒号"："分隔。
 3.还可以在编译目标代码时指定程序的动态库搜索路径。这是通过gcc 的参数"-Wl,-rpath,"指定（如例3所示）。当指定多个动态库搜索路径时，路径之间用冒号"："分隔。
 
+# 查看可执行程序或库文件所依赖的库和目录
+ldd lib.so
+
 # 使用wpa_supplicant工具联网
 wpa_supplicant -Dnl80211 -iwlan0 -c/tmp/wpa_supplicant.conf -B
 

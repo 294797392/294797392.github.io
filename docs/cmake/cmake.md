@@ -25,3 +25,8 @@ configure_file(<input> <output>
 
 # 在CMake里访问系统环境变量
 使用`$ENV{VAR}`语法访问VAR变量
+
+# 指定目标的输入目录
+CMake的输出目录保存在CMake自带的变量里，只要修改相对应的变量的值就可以了。
+修改可执行程序的输出目录：`set(CMAKE_RUNTIME_OUTPUT_DIRECTORY dir)`
+修改库文件的输出目录：`set(LIBRARY_OUTPUT_PATH dir)`
