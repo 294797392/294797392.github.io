@@ -306,6 +306,7 @@ void* mplayer_monitor_thread_process(void* userdata)
 	mp->ops->mpops_wait_process_exit(mp);
 	fprintf(stdout, "mplayer process stopped\n");
 	mp->ops->mpops_release_process_resource(mp);
+	mp->status = MPSTAT_STOPPED;
 	if (mp->event_listener)
 	{
 		mp->event_listener(MPEVT_STATUS_CHANGED, (void*)MPSTAT_STOPPED);
@@ -366,6 +367,7 @@ mplayer_t* mplayer_create_instance()
 	memset(instance, 0, sizeof(mplayer_t));
 	instance->ops = &ops_instance;
 	instance->volume = VOLUME_DEFAULT;
+	instance->status = MPSTAT_STOPPED;
 
 	mplayer_priv_t *priv = (mplayer_priv_t*)malloc(sizeof(mplayer_priv_t));
 	memset(priv, 0, sizeof(mplayer_priv_t));
@@ -393,6 +395,7 @@ int mplayer_play(mplayer_t *mp)
 	}
 
 	pthread_create(&mp->monitor_thread, NULL, mplayer_monitor_thread_process, mp);
+	mp->status = MPSTAT_PLAYING;
 	return MP_SUCCESS;
 }
 
@@ -400,18 +403,29 @@ void mplayer_stop(mplayer_t *mp)
 {
 	mp->ops->mpops_close_player_process(mp);
 	mp->ops->mpops_release_process_resource(mp);
+	mp->status = MPSTAT_STOPPED;
 }
 
 int mplayer_pause(mplayer_t *mp)
 {
 	const char *pause_cmd = "pause";
-	return mp->ops->mpops_send_command(mp, pause_cmd, strlen(pause_cmd));
+	int ret = mp->ops->mpops_send_command(mp, pause_cmd, strlen(pause_cmd));
+	if (ret == MP_SUCCESS)
+	{
+		mp->status = MPSTAT_PAUSED;
+	}
+	return ret;
 }
 
 int mplayer_resume(mplayer_t *mp)
 {
 	const char *resume_cmd = "pause";
-	return mp->ops->mpops_send_command(mp, resume_cmd, strlen(resume_cmd));
+	int ret = mp->ops->mpops_send_command(mp, resume_cmd, strlen(resume_cmd));
+	if (ret == MP_SUCCESS)
+	{
+		mp->status = MPSTAT_PLAYING;
+	}
+	return ret;
 }
 
 void mplayer_increase_volume(mplayer_t *mp)
@@ -453,4 +467,9 @@ int mplayer_get_position(mplayer_t *mp)
 void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener)
 {
 	mp->event_listener = listener;
+}
+
+mplayer_status_enum mplayer_get_status(mplayer_t *mp)
+{
+	return mp->status;
 }

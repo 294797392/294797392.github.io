@@ -74,6 +74,7 @@ typedef struct tagMPLAYER_OPS mplayer_ops_t;
 struct tagMPLAYER{
 	char source[DEFAULT_SOURCE_SIZE];
 	int volume;
+	mplayer_status_enum status;
 	mp_event_listener event_listener;
 	pthread_t monitor_thread;
 	mplayer_priv_t *priv;
@@ -117,5 +118,6 @@ int mplayer_get_duration(mplayer_t *mp);
 /* 返回当前播放进度，以秒为单位 */
 int mplayer_get_position(mplayer_t *mp);
 void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener);
+mplayer_status_enum mplayer_get_status(mplayer_t *mp);
 
 #endif
