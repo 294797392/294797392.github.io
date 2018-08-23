@@ -204,6 +204,11 @@ int mpops_open_player_process(mplayer_t *mp)
 	return MP_SUCCESS;
 }
 
+int mpops_process_is_exit(mplayer_t *mp)
+{
+	return mp->priv->pid != 0;
+}
+
 /* 等待mplayer播放进程结束 */
 int mpops_wait_process_exit(mplayer_t *mp)
 {
