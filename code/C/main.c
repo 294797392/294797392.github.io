@@ -9,13 +9,24 @@
 
 #include "mplayer.h"
 
+int event_handler(mplayer_event_enum evt, void *evt_data, void *userdata)
+{
+	fprintf(stdout, "ÊÕµ½evt:%d\n", evt);
+	return 0;
+}
+
 void test_mplayer()
 {
-	const char *source = "http://file.suibiwu.com/typecho/2017/03/3021894958.mp3";
+	const char *source = "http://file.suibiwu.com/typecho/2017/03/3787831629.mp3";
 
 	mplayer_t *mp = mplayer_create_instance();
 	mplayer_open(mp, source, strlen(source));
 	mplayer_play(mp);
+
+	mplayer_listener_t listener;
+	listener.userdata = mp;
+	listener.handler = event_handler;
+	mplayer_listen_event(mp, listener);
 	SLEEP(2000);
 	int duration = mplayer_get_duration(mp);
 	fprintf(stdout, "duration:%d\n", duration);

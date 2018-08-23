@@ -307,9 +307,9 @@ void* mplayer_monitor_thread_process(void* userdata)
 	fprintf(stdout, "mplayer process stopped\n");
 	mp->ops->mpops_release_process_resource(mp);
 	mp->status = MPSTAT_STOPPED;
-	if (mp->event_listener)
+	if (mp->listener && mp->listener->handler)
 	{
-		mp->event_listener(MPEVT_STATUS_CHANGED, (void*)MPSTAT_STOPPED);
+		mp->listener->handler(MPEVT_STATUS_CHANGED, MPSTAT_STOPPED, mp->listener->userdata);
 	}
 	return NULL;
 }
@@ -471,9 +471,14 @@ int mplayer_get_position(mplayer_t *mp)
 	return strlen(position) == 0 ? -1 : atoi(position);
 }
 
-void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener)
+void mplayer_listen_event(mplayer_t *mp, mplayer_listener_t listener)
 {
-	mp->event_listener = listener;
+	if (!mp->listener)
+	{
+		mp->listener = (mplayer_listener_t*)malloc(sizeof(mplayer_listener_t));
+	}
+	mp->listener->handler = listener.handler;
+	mp->listener->userdata = listener.userdata;
 }
 
 mplayer_status_enum mplayer_get_status(mplayer_t *mp)

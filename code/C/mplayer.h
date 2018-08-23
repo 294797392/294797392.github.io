@@ -63,7 +63,14 @@ typedef enum tagMPSTATUS
 }mplayer_status_enum;
 
 /* mplayer事件回调 */
-typedef int(*mp_event_listener)(mplayer_event_enum evt, void *data);
+typedef int(*mp_event_handler)(mplayer_event_enum evt, void *evt_data, void *userdata);
+
+/* 事件监听器 */
+typedef struct tagMPLISTENER
+{
+	mp_event_handler handler;
+	void *userdata;
+} mplayer_listener_t;
 
 /* 不同平台下的播放器内部对象指针 */
 typedef struct tagMPLAYER_PRIV mplayer_priv_t;
@@ -79,7 +86,7 @@ struct tagMPLAYER{
 	char source[DEFAULT_SOURCE_SIZE];
 	int volume;
 	mplayer_status_enum status;
-	mp_event_listener event_listener;
+	mplayer_listener_t *listener;
 	pthread_t monitor_thread;
 	mplayer_priv_t *priv;
 	mplayer_ops_t *ops;
@@ -122,7 +129,7 @@ void mplayer_decrease_volume(mplayer_t *mp);
 int mplayer_get_duration(mplayer_t *mp);
 /* 返回当前播放进度，以秒为单位 */
 int mplayer_get_position(mplayer_t *mp);
-void mplayer_listen_event(mplayer_t *mp, mp_event_listener listener);
+void mplayer_listen_event(mplayer_t *mp, mplayer_listener_t listener);
 mplayer_status_enum mplayer_get_status(mplayer_t *mp);
 
 #endif
