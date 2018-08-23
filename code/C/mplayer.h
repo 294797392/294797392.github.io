@@ -105,6 +105,9 @@ struct tagMPLAYER_OPS
 	/* 关闭进程 */
 	void(*mpops_close_player_process)(mplayer_t *mp);
 
+	/* 判断mplayer进程是否已经退出 */
+	int(*mpops_process_is_exit)(mplayer_t *mp);
+
 	/* 释放mplayer进程所占用的资源 */
 	void(*mpops_release_process_resource)(mplayer_t *mp);
 

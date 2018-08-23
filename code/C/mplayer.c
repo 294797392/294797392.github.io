@@ -102,6 +102,11 @@ int mpops_wait_process_exit(mplayer_t *mp)
 	return WaitForSingleObject(mp->priv->pinfo.hProcess, INFINITE);
 }
 
+int mpops_process_is_exit(mplayer_t *mp)
+{
+	return mp->priv->pinfo.hProcess == NULL;
+}
+
 void mpops_close_player_process(mplayer_t *mp)
 {
 	if (mp->priv->pinfo.hProcess)
@@ -120,7 +125,7 @@ void mpops_release_process_resource(mplayer_t *mp)
 
 int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
 {
-	char command[64] = { '\0' };
+	char command[256] = { '\0' };
 	strncpy(command, cmd, sizeof(command));
 	strncat(command, "\r\n", 2);
 
@@ -233,12 +238,13 @@ void mpops_release_process_resource(mplayer_t *mp)
 	close(mp->priv->fd_write);
 	mp->priv->fd_read = 0;
 	mp->priv->fd_write = 0;
+	mp->priv->pid = 0;
 }
 
 /* 向mplayer播放进程发送消息 */
 int mpops_send_command(mplayer_t *mp, const char *cmd, int size)
 {
-	char command[64] = { '\0' };
+	char command[256] = { '\0' };
 	strncpy(command, cmd, sizeof(command));
 	strncat(command, "\n", 1);
 
@@ -273,6 +279,7 @@ static mplayer_ops_t ops_instance =
 {
 	.mpops_open_player_process = mpops_open_player_process,
 	.mpops_wait_process_exit = mpops_wait_process_exit,
+	.mpops_process_is_exit = mpops_process_is_exit,
 	.mpops_close_player_process = mpops_close_player_process,
 	.mpops_release_process_resource = mpops_release_process_resource,
 	.mpops_send_command = mpops_send_command,
@@ -396,6 +403,13 @@ void mplayer_close(mplayer_t *mp)
 
 int mplayer_play(mplayer_t *mp)
 {
+	if (!mp->ops->mpops_process_is_exit(mp))
+	{
+		char cmd[1024] = { '\0' };
+		snprintf(cmd, sizeof(cmd), "loadfile %s", mp->source);
+		return mp->ops->mpops_send_command(mp, cmd, strlen(cmd));
+	}
+
 	int ret = mp->ops->mpops_open_player_process(mp);
 	if (ret != MP_SUCCESS)
 	{
@@ -485,4 +499,9 @@ void mplayer_listen_event(mplayer_t *mp, mplayer_listener_t listener)
 mplayer_status_enum mplayer_get_status(mplayer_t *mp)
 {
 	return mp->status;
+}
+
+int mplayer_send_command(mplayer_t *mp, const char *cmd, int size)
+{
+	return mp->ops->mpops_send_command(mp, cmd, size);
 }
