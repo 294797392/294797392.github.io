@@ -309,7 +309,8 @@ void* mplayer_monitor_thread_process(void* userdata)
 	mp->status = MPSTAT_STOPPED;
 	if (mp->listener && mp->listener->handler)
 	{
-		mp->listener->handler(MPEVT_STATUS_CHANGED, MPSTAT_STOPPED, mp->listener->userdata);
+		int status = (int)MPSTAT_STOPPED;
+		mp->listener->handler(MPEVT_STATUS_CHANGED, &status, mp->listener->userdata);
 	}
 	return NULL;
 }
