@@ -174,7 +174,7 @@ int mpops_open_player_process(mplayer_t *mp)
 	}
 
 	pid_t pid = fork();
-	if(pid > 0)
+	if (pid > 0)
 	{
 		mp->priv->fd_read = pipe1[0];
 		close(pipe1[1]);
@@ -284,9 +284,9 @@ int mpops_read_data(mplayer_t *mp, char *buff, int size)
 static mplayer_ops_t ops_instance =
 {
 	.mpops_open_player_process = mpops_open_player_process,
+	.mpops_close_player_process = mpops_close_player_process,
 	.mpops_wait_process_exit = mpops_wait_process_exit,
 	.mpops_process_is_exit = mpops_process_is_exit,
-	.mpops_close_player_process = mpops_close_player_process,
 	.mpops_release_process_resource = mpops_release_process_resource,
 	.mpops_send_command = mpops_send_command,
 	.mpops_read_data = mpops_read_data
