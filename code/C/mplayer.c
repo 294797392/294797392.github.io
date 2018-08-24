@@ -180,6 +180,7 @@ int mpops_open_player_process(mplayer_t *mp)
 		close(pipe1[1]);
 		mp->priv->fd_write = pipe2[1];
 		close(pipe2[0]);
+		mp->priv->pid = pid;
 	}
 	else if(pid == 0)
 	{
@@ -206,7 +207,7 @@ int mpops_open_player_process(mplayer_t *mp)
 
 int mpops_process_is_exit(mplayer_t *mp)
 {
-	return mp->priv->pid != 0;
+	return mp->priv->pid == 0;
 }
 
 /* 等待mplayer播放进程结束 */
