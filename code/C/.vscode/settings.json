@@ -5,6 +5,7 @@
         "istream": "c",
         "mplayer.h": "c",
         "stdio.h": "c",
-        "cerrno": "c"
+        "cerrno": "c",
+        "pthread.h": "c"
     }
 }
