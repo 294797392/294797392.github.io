@@ -1,4 +1,5 @@
-# apache2配置文件详解
+### 安装apache2
+ubuntu系统：sudo apt-get install apache2
 
 ### 配置文件路径
 Ubuntu系统下：/etc/apache2/apache2.conf
