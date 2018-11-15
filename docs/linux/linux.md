@@ -13,3 +13,6 @@ wpa_supplicant -Dnl80211 -iwlan0 -c/tmp/wpa_supplicant.conf -B
 
 # 增加环境变量
 修改`/etc/profile`文件，在最底边加入`export name=value`，这个文件里加入的环境变量对所有用户生效。修改完要注销系统再登录系统才生效。
+
+# 查看当前目录占用空间大小
+du -sh *

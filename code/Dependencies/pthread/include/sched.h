@@ -36,6 +36,11 @@
  *      if not, write to the Free Software Foundation, Inc.,
  *      59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
+#ifdef PTW32_SCHED_LEVEL
+#undef PTW32_SCHED_LEVEL
+#endif
+
+
 #if !defined(_SCHED_H)
 #define _SCHED_H
 
@@ -60,9 +65,13 @@
 
 #define PTW32_SCHED_LEVEL_MAX 3
 
-#if ( defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112 )  || !defined(PTW32_SCHED_LEVEL)
+#if ( defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112 ) && !defined(PTW32_SCHED_LEVEL)
 #define PTW32_SCHED_LEVEL PTW32_SCHED_LEVEL_MAX
 /* Include everything */
+#endif
+
+#ifndef PTW32_SCHED_LEVEL
+#define PTW32_SCHED_LEVEL PTW32_SCHED_LEVEL_MAX
 #endif
 
 

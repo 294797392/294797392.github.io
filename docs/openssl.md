@@ -34,3 +34,6 @@ openssl ca [-in ] 指定证书请求文件的目录（使用openssl req命令生
 1.生成私钥文件（openssl genrsa）
 2.使用私钥生成证书请求文件（openssl req）
 3.使用证书请求文件生成证书（openssl ca）
+
+## 生成公钥私钥
+ssh-keygen

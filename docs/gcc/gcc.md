@@ -12,3 +12,5 @@ cmake . -DCMAKE_BUILD_TYPE=Debug
 `ldd <exepath/libpath>`
 查看可执行程序的依赖项和依赖项的路径。当运行程序时提示找不到符号的时候，可以用此命令来查看依赖项是否完整。
 
+`objdump -a <exepath/libpath>`
+查看当前应用程序或库的所属架构（32位或64位程序）

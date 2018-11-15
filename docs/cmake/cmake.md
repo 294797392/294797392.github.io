@@ -30,3 +30,7 @@ configure_file(<input> <output>
 CMake的输出目录保存在CMake自带的变量里，只要修改相对应的变量的值就可以了。
 修改可执行程序的输出目录：`set(CMAKE_RUNTIME_OUTPUT_DIRECTORY dir)`
 修改库文件的输出目录：`set(LIBRARY_OUTPUT_PATH dir)`
+
+### CMakeCache.txt
+执行CMakeLists.txt的时候，会生成CMakeCache.txt文件，该文件里存储了CMake使用的缓存信息。
+1. 使用-D选项生成的key-value信息
