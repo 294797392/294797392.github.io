@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wireless", "wireless", "{E2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwl", "libwl\libwl.vcxproj", "{679DEDFC-22DF-4134-AE94-828E86EBE48E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvisual", "libvisual\libvisual.vcxproj", "{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,16 @@ Global
 		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x64.Build.0 = Release|x64
 		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x86.ActiveCfg = Release|Win32
 		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x86.Build.0 = Release|Win32
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|x64.ActiveCfg = Debug|x64
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|x64.Build.0 = Debug|x64
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|x86.ActiveCfg = Debug|Win32
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|x86.Build.0 = Debug|Win32
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Release|x64.ActiveCfg = Release|x64
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Release|x64.Build.0 = Release|x64
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Release|x86.ActiveCfg = Release|Win32
+		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
