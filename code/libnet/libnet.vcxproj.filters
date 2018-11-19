@@ -2,5 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="libnet.c" />
+    <ClCompile Include="network_driver_ndis.c" />
+    <ClCompile Include="if_list.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libnet.h" />
+    <ClInclude Include="network_driver.h" />
+    <ClInclude Include="build_config.h" />
   </ItemGroup>
 </Project>

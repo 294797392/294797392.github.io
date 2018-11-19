@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2019
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "http_server", "http_server\http_server.vcxproj", "{7C4BED2E-FF04-4229-953F-7D58C9D2EE06}"
 EndProject
@@ -16,10 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sysmon", "sysmon", "{8F33180B-2180-4BA8-9EB7-7931FC066839}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsysmon", "libsysmon\libsysmon.vcxproj", "{B658B4C6-008A-4C55-84AD-4227D7EDB3F8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wireless", "wireless", "{E2CFF503-28F2-49B8-83DB-D9E66C76B1E3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwl", "libwl\libwl.vcxproj", "{679DEDFC-22DF-4134-AE94-828E86EBE48E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvisual", "libvisual\libvisual.vcxproj", "{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}"
 EndProject
@@ -97,16 +93,6 @@ Global
 		{B658B4C6-008A-4C55-84AD-4227D7EDB3F8}.Release|x64.Build.0 = Release|x64
 		{B658B4C6-008A-4C55-84AD-4227D7EDB3F8}.Release|x86.ActiveCfg = Release|Win32
 		{B658B4C6-008A-4C55-84AD-4227D7EDB3F8}.Release|x86.Build.0 = Release|Win32
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Debug|x64.ActiveCfg = Debug|x64
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Debug|x64.Build.0 = Debug|x64
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Debug|x86.ActiveCfg = Debug|Win32
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Debug|x86.Build.0 = Debug|Win32
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|Any CPU.ActiveCfg = Release|Win32
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x64.ActiveCfg = Release|x64
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x64.Build.0 = Release|x64
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x86.ActiveCfg = Release|Win32
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E}.Release|x86.Build.0 = Release|Win32
 		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|x64.ActiveCfg = Debug|x64
 		{E42CD119-BF0F-4717-B04B-7ED9D6A9CD2C}.Debug|x64.Build.0 = Debug|x64
@@ -123,7 +109,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B658B4C6-008A-4C55-84AD-4227D7EDB3F8} = {8F33180B-2180-4BA8-9EB7-7931FC066839}
-		{679DEDFC-22DF-4134-AE94-828E86EBE48E} = {E2CFF503-28F2-49B8-83DB-D9E66C76B1E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8D3B72D-F49E-40E1-A1AE-A31B86E2798A}

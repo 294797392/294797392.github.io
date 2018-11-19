@@ -2,17 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <Windows.h>
-#include <WinUser.h>
+#include "network_driver.h"
 
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+extern struct network_driver_s network_driver_ndis;
 
-int main(int agrc, char *argv[])
+int main1(int agrc, char *argv[])
 {
-	LPMSG msg = NULL;
-	while (GetMessage(msg, NULL, 0, 0))
-	{
-		printf("asd\n");
-	}
+	network_driver_ndis.init("");
+
 	return 1;
 }
