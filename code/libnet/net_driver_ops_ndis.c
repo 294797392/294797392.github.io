@@ -1,12 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <locale.h>
 
 #include <Windows.h>
 #include <WinBase.h>
 #include <ntddndis.h>
 
-#include "network_driver.h"
+#include "libnet.h"
+#include "net_driver_ops.h"
 
 #define NDISUIO_DEVICE_NAME TEXT("\\\\.\\\\Ndisuio")
 
@@ -38,6 +40,15 @@
 	_NDISUIO_CTL_CODE(0x204, METHOD_BUFFERED, \
 			  FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 
+typedef struct net_driver_ndis_data_s
+{
+	/* userspace io */
+	HANDLE ndisuio;
+
+	/* 当前指定的网络接口名字 */
+	char ifname[128];
+}net_driver_ndis_data;
+
 typedef struct _NDISUIO_QUERY_BINDING
 {
 	ULONG BindingIndex;
@@ -47,15 +58,9 @@ typedef struct _NDISUIO_QUERY_BINDING
 	ULONG DeviceDescrLength;
 } NDISUIO_QUERY_BINDING, *PNDISUIO_QUERY_BINDING;
 
-typedef struct ndis_driver_s
+static void *net_driver_ndis_init()
 {
-	/* userspace io */
-	HANDLE ndisuio;
-}ndis_driver;
-
-static void *ndis_drv_init(const char *ifname)
-{
-	ndis_driver *drv = (ndis_driver*)calloc(1, sizeof(ndis_driver));
+	net_driver_ndis_data *drv = (net_driver_ndis_data*)calloc(1, sizeof(net_driver_ndis_data));
 	if (!drv)
 	{
 		goto error;
@@ -86,9 +91,50 @@ error:
 	return NULL;
 }
 
-struct network_driver_s network_driver_ndis =
+static int net_driver_ndis_scan(void *handle, interfase *iflist, size_t list_len)
+{
+	net_driver_ndis_data *drv = (net_driver_ndis_data*)handle;
+
+	size_t bufsize = sizeof(NDISUIO_QUERY_BINDING) + 1024;
+	NDISUIO_QUERY_BINDING *binding = (NDISUIO_QUERY_BINDING*)malloc(bufsize);
+	DWORD written = 0;
+
+	for (size_t i = 0; i < list_len; i++)
+	{
+		memset(binding, 0, bufsize);
+		binding->BindingIndex = i;
+		if (DeviceIoControl(drv->ndisuio, IOCTL_NDISUIO_QUERY_BINDING, binding, sizeof(NDISUIO_QUERY_BINDING), binding, (DWORD)bufsize, &written, NULL) == 0)
+		{
+			DWORD error = GetLastError();
+			if (error == ERROR_NO_MORE_ITEMS)
+			{
+				break;
+			}
+			else
+			{
+				printf("IOCTL_NDISUIO_QUERY_BINDING failed: %d", error);
+				goto error;
+			}
+		}
+
+		wcstombs(iflist[i].name, (wchar_t*)((char*)binding) + binding->DeviceNameOffset, binding->DeviceNameLength);
+		wcstombs(iflist[i].description, (wchar_t*)(char*)binding + binding->DeviceDescrOffset, binding->DeviceDescrLength);
+	}
+
+	return NERR_OK;
+
+error:
+	if (binding)
+	{
+		free(binding);
+	}
+	return NERR_FAIL;
+}
+
+net_driver_ops net_driver_ndis_ops =
 {
 	.name = "ndis",
-	.description = "Windows NDIS driver",
-	.init = ndis_drv_init
+	.description = "management network using windows ndis",
+	.init = net_driver_ndis_init,
+	.scan = net_driver_ndis_scan
 };

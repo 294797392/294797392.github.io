@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "tk_string.h"
+#include "bstring.h"
 
 int string_splite(char *str, char splitter, char *lvalue, size_t lsize, char *rvalue, size_t rsize)
 {
@@ -25,7 +25,7 @@ int string_splite(char *str, char splitter, char *lvalue, size_t lsize, char *rv
 		}
 	}
 
-	if (find == 0) 
+	if (find == 0)
 	{
 		return 0;
 	}

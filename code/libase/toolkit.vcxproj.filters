@@ -3,16 +3,19 @@
   <ItemGroup>
     <ClInclude Include="buffer_queue.h" />
     <ClInclude Include="ini.h" />
-    <ClInclude Include="tk_time.h" />
-    <ClInclude Include="tk_string.h" />
+    <ClInclude Include="test.h" />
+    <ClInclude Include="bstring.h" />
+    <ClInclude Include="btime.h" />
+    <ClInclude Include="os.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="bit.c" />
     <ClCompile Include="buffer_queue.c" />
     <ClCompile Include="ini.c" />
-    <ClCompile Include="tk_time.c" />
-    <ClCompile Include="tk_string.c" />
+    <ClCompile Include="bstring.c" />
+    <ClCompile Include="btime.c" />
+    <ClCompile Include="os.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\log.ini" />

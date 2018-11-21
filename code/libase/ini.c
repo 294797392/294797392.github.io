@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "toolkit_ini.h"
-#include "toolkit_string.h"
+#include "ini.h"
+#include "bstring.h"
 
 #ifdef WINDOWS
 #define strdup(str) _strdup(str)

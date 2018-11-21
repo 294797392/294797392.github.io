@@ -2,5 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "tk_time.h"
+#include "os.h"
 
+void osstrlen(OSCHAR *str)
+{
+}

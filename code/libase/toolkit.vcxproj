@@ -23,6 +23,7 @@
     <ProjectGuid>{19FCCE71-5544-4DF6-9DED-AB1D89F4BE25}</ProjectGuid>
     <RootNamespace>toolkit</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectName>libase</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -125,16 +126,19 @@
   <ItemGroup>
     <ClInclude Include="buffer_queue.h" />
     <ClInclude Include="ini.h" />
-    <ClInclude Include="tk_string.h" />
-    <ClInclude Include="tk_time.h" />
+    <ClInclude Include="os.h" />
+    <ClInclude Include="test.h" />
+    <ClInclude Include="bstring.h" />
+    <ClInclude Include="btime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bit.c" />
     <ClCompile Include="buffer_queue.c" />
     <ClCompile Include="ini.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="tk_string.c" />
-    <ClCompile Include="tk_time.c" />
+    <ClCompile Include="bstring.c" />
+    <ClCompile Include="btime.c" />
+    <ClCompile Include="os.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\log.ini" />

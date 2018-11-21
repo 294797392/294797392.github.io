@@ -3,12 +3,12 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="libnet.c" />
-    <ClCompile Include="network_driver_ndis.c" />
     <ClCompile Include="if_list.c" />
+    <ClCompile Include="net_driver_ops_ndis.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libnet.h" />
-    <ClInclude Include="network_driver.h" />
     <ClInclude Include="build_config.h" />
+    <ClInclude Include="net_driver_ops.h" />
   </ItemGroup>
 </Project>

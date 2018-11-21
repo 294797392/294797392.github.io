@@ -85,17 +85,18 @@ static void ndisuio_query_bindings(HANDLE ndisuio)
 	if (b == NULL)
 		return;
 
-	for (i = 0; ; i++) {
+	for (i = 0; ; i++) 
+	{
 		memset(b, 0, blen);
 		b->BindingIndex = i;
-		if (!DeviceIoControl(ndisuio, IOCTL_NDISUIO_QUERY_BINDING,
-			b, sizeof(NDISUIO_QUERY_BINDING), b,
-			(DWORD)blen, &written, NULL)) {
+		if (!DeviceIoControl(ndisuio, IOCTL_NDISUIO_QUERY_BINDING,b, sizeof(NDISUIO_QUERY_BINDING), b,(DWORD)blen, &written, NULL)) 
+		{
 			error = (int)GetLastError();
 			if (error == ERROR_NO_MORE_ITEMS)
+			{
 				break;
-			printf("IOCTL_NDISUIO_QUERY_BINDING failed: %d",
-				error);
+			}
+			printf("IOCTL_NDISUIO_QUERY_BINDING failed: %d",error);
 			break;
 		}
 
@@ -161,7 +162,7 @@ static void pcap_enum_devs(void)
 #endif /* CONFIG_USE_NDISUIO */
 
 
-int main(int argc, char *argv[])
+int main1(int argc, char *argv[])
 {
 #ifdef CONFIG_USE_NDISUIO
 	ndisuio_enum_bindings();
