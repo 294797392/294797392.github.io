@@ -117,8 +117,8 @@ static int net_driver_ndis_scan(void *handle, interfase *iflist, size_t list_len
 			}
 		}
 
-		wcstombs(iflist[i].name, (wchar_t*)((char*)binding) + binding->DeviceNameOffset, binding->DeviceNameLength);
-		wcstombs(iflist[i].description, (wchar_t*)(char*)binding + binding->DeviceDescrOffset, binding->DeviceDescrLength);
+		wcstombs(iflist[i].name, (wchar_t*)((char*)binding + binding->DeviceNameOffset), binding->DeviceNameLength);
+		wcstombs(iflist[i].description, (wchar_t*)((char*)binding + binding->DeviceDescrOffset), binding->DeviceDescrLength);
 	}
 
 	return NERR_OK;

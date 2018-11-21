@@ -9,6 +9,6 @@
 
 void libnet_init()
 {
-	/* 设置当前环境的区域信息（编码方式等），Windows默认使用utf16编码 */
+	/* 设置当前环境的区域信息（编码方式等），中文版Windows默认使用utf16编码 */
 	setlocale(LC_ALL, "");
 }
