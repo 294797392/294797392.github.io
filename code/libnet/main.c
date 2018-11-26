@@ -27,9 +27,9 @@ int main(int agrc, char *argv[])
 		printf("name:%s, desc:%s\n", iface.name, iface.description);
 	}
 
-	/*const char *str = setlocale(LC_ALL, "");
-	unsigned char buff[1024] = { '\0' };
-	int i = wcstombs(buff, L"º×Óì", sizeof(buff));*/
+	//const char *str = setlocale(LC_ALL, "");
+	//unsigned char buff[1024] = { '\0' };
+	//int i = wcstombs(buff, L"abcdº×Óì", sizeof(buff));
 
 	Sleep(999999);
 
