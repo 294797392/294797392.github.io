@@ -5,10 +5,12 @@
     <ClCompile Include="libnet.c" />
     <ClCompile Include="if_list.c" />
     <ClCompile Include="net_driver_ops_ndis.c" />
+    <ClCompile Include="libwl.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libnet.h" />
     <ClInclude Include="build_config.h" />
     <ClInclude Include="net_driver_ops.h" />
+    <ClInclude Include="libwl.h" />
   </ItemGroup>
 </Project>
