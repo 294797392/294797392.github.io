@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "http_server", "http_server\http_server.vcxproj", "{7C4BED2E-FF04-4229-953F-7D58C9D2EE06}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libase", "libase\toolkit.vcxproj", "{19FCCE71-5544-4DF6-9DED-AB1D89F4BE25}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libkav", "libkav\libkav.vcxproj", "{4DD6A971-0365-4E72-9866-94A55A078B06}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo", "demo\demo.vcxproj", "{6144621E-4D99-4A3B-BAF1-6BD623024058}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,16 @@ Global
 		{4DD6A971-0365-4E72-9866-94A55A078B06}.Release|x64.Build.0 = Release|x64
 		{4DD6A971-0365-4E72-9866-94A55A078B06}.Release|x86.ActiveCfg = Release|Win32
 		{4DD6A971-0365-4E72-9866-94A55A078B06}.Release|x86.Build.0 = Release|Win32
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Debug|x64.ActiveCfg = Debug|x64
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Debug|x64.Build.0 = Debug|x64
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Debug|x86.ActiveCfg = Debug|Win32
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Debug|x86.Build.0 = Debug|Win32
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Release|Any CPU.ActiveCfg = Release|Win32
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Release|x64.ActiveCfg = Release|x64
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Release|x64.Build.0 = Release|x64
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Release|x86.ActiveCfg = Release|Win32
+		{6144621E-4D99-4A3B-BAF1-6BD623024058}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
