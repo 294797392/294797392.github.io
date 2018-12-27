@@ -1,0 +1,18 @@
+{
+
+    "interface": "wlan0",
+
+    "types": [
+        "tds:Device"
+    ],
+
+    "scopes": [
+        "nvif://www.onvif.org/name/IPC",
+        "onvif://www.onvif.org/hardware/MSTAR",
+        "onvif://www.onvif.org/Profile/Streaming"
+    ],
+
+    "addresses": [
+        "http://{IP}:{PORT}/onvif/device_service"
+    ]
+}

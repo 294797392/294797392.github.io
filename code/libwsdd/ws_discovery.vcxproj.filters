@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.c" />
+    <ClCompile Include="wsddsvc.c" />
+    <ClCompile Include="..\Dependencies\gsoap\gsoap\stdsoap2.c">
+      <Filter>gSOAP</Filter>
+    </ClCompile>
+    <ClCompile Include="gSOAP_generated\soapC.c">
+      <Filter>gSOAP_generated</Filter>
+    </ClCompile>
+    <ClCompile Include="client_event_handler.c" />
+    <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\wsaapi.c">
+      <Filter>gSOAP\plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\wsddapi.c">
+      <Filter>gSOAP\plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="gSOAP_generated\soapClient.c">
+      <Filter>gSOAP_generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\threads.c">
+      <Filter>gSOAP\plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libkagura\cJSON.c">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libkagura\cJSON_Utils.c">
+      <Filter>common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="gSOAP">
+      <UniqueIdentifier>{6e471054-d679-4d38-a5e6-1f900064827d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gSOAP_generated">
+      <UniqueIdentifier>{01300961-7e56-4df1-8828-76e407888143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gSOAP\plugin">
+      <UniqueIdentifier>{3d452212-bfbc-4b51-9906-8e414ccb8e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{b4da05cf-f991-4bb8-a052-80f8333f7b01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="wsddsvc.h" />
+    <ClInclude Include="..\Dependencies\gsoap\gsoap\stdsoap2.h">
+      <Filter>gSOAP</Filter>
+    </ClInclude>
+    <ClInclude Include="gSOAP_generated\soapH.h">
+      <Filter>gSOAP_generated</Filter>
+    </ClInclude>
+    <ClInclude Include="gSOAP_generated\soapStub.h">
+      <Filter>gSOAP_generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Dependencies\gsoap\gsoap\plugin\wsaapi.h">
+      <Filter>gSOAP\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Dependencies\gsoap\gsoap\plugin\wsddapi.h">
+      <Filter>gSOAP\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Dependencies\gsoap\gsoap\plugin\threads.h">
+      <Filter>gSOAP\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="wsdd.h" />
+    <ClInclude Include="..\libkagura\cJSON.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libkagura\cJSON_Utils.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gSOAP_generated\wsdd.nsmap">
+      <Filter>gSOAP_generated</Filter>
+    </None>
+    <None Include="..\..\docs\WS-Discovery\WS-Discovery.md" />
+    <None Include="wsddsvc.config.json" />
+  </ItemGroup>
+</Project>

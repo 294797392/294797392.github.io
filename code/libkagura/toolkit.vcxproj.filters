@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="buffer_queue.h" />
+    <ClInclude Include="ini.h" />
+    <ClInclude Include="test.h" />
+    <ClInclude Include="bstring.h" />
+    <ClInclude Include="btime.h" />
+    <ClInclude Include="os.h" />
+    <ClInclude Include="getopt.h">
+      <Filter>getopt</Filter>
+    </ClInclude>
+    <ClInclude Include="stdh.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c" />
+    <ClCompile Include="bit.c" />
+    <ClCompile Include="buffer_queue.c" />
+    <ClCompile Include="ini.c" />
+    <ClCompile Include="bstring.c" />
+    <ClCompile Include="btime.c" />
+    <ClCompile Include="os.c" />
+    <ClCompile Include="getopt.c">
+      <Filter>getopt</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\log.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="getopt">
+      <UniqueIdentifier>{afa3dcb6-3e33-4908-ac20-6b828335dda3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
