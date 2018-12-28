@@ -23,11 +23,11 @@
     <ProjectGuid>{19FCCE71-5544-4DF6-9DED-AB1D89F4BE25}</ProjectGuid>
     <RootNamespace>toolkit</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
-    <ProjectName>likagura</ProjectName>
+    <ProjectName>libcommonslim</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -124,24 +124,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="array.h" />
+    <ClInclude Include="array_internal.h" />
     <ClInclude Include="buffer_queue.h" />
-    <ClInclude Include="stdh.h" />
-    <ClInclude Include="getopt.h" />
-    <ClInclude Include="ini.h" />
-    <ClInclude Include="os.h" />
-    <ClInclude Include="test.h" />
-    <ClInclude Include="bstring.h" />
-    <ClInclude Include="btime.h" />
+    <ClInclude Include="cJSON.h" />
+    <ClInclude Include="cJSON_Utils.h" />
+    <ClInclude Include="defs.h" />
+    <ClInclude Include="dictionary.h" />
+    <ClInclude Include="elog.h" />
+    <ClInclude Include="exception.h" />
+    <ClInclude Include="frame_queue.h" />
+    <ClInclude Include="inihandler.h" />
+    <ClInclude Include="json_helper.h" />
+    <ClInclude Include="memwatch.h" />
+    <ClInclude Include="misc.h" />
+    <ClInclude Include="string_utils.h" />
+    <ClInclude Include="struct_macro.h" />
+    <ClInclude Include="trash_stack.h" />
+    <ClInclude Include="util_internal.h" />
+    <ClInclude Include="win32.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bit.c" />
+    <ClCompile Include="array.c" />
     <ClCompile Include="buffer_queue.c" />
-    <ClCompile Include="getopt.c" />
-    <ClCompile Include="ini.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="bstring.c" />
-    <ClCompile Include="btime.c" />
-    <ClCompile Include="os.c" />
+    <ClCompile Include="cJSON.c" />
+    <ClCompile Include="cJSON_Utils.c" />
+    <ClCompile Include="dictionary.c" />
+    <ClCompile Include="elog.c" />
+    <ClCompile Include="inihandler.c" />
+    <ClCompile Include="misc.c" />
+    <ClCompile Include="string_utils.c" />
+    <ClCompile Include="trash_stack.c" />
+    <ClCompile Include="util_internal.c" />
+    <ClCompile Include="win32.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\log.ini" />

@@ -20,6 +20,10 @@ MUST be set to a random value between 0 and APP_MAX_DE */
 #define WSDD_SOAP_TS_ADDRESS "soap.udp://239.255.255.250:3702"
 
 #define LOCAL_IPADDR "192.168.1.190"
+#define IPADDR_LEN 32
 
+int uricmp(const char *uri1, const char *uri2);
+
+int wsdd_match(char **scopes, int scope_cnt, const char *target_scope);
 
 #endif

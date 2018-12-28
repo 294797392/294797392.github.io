@@ -7,4 +7,5 @@
 int main(int argc, char *argv[])
 {
 	start_wsddsvc();
+	return 0;
 }

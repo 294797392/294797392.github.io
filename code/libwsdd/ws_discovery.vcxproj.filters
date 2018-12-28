@@ -9,7 +9,6 @@
     <ClCompile Include="gSOAP_generated\soapC.c">
       <Filter>gSOAP_generated</Filter>
     </ClCompile>
-    <ClCompile Include="client_event_handler.c" />
     <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\wsaapi.c">
       <Filter>gSOAP\plugin</Filter>
     </ClCompile>
@@ -22,12 +21,43 @@
     <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\threads.c">
       <Filter>gSOAP\plugin</Filter>
     </ClCompile>
-    <ClCompile Include="..\libkagura\cJSON.c">
-      <Filter>common</Filter>
+    <ClCompile Include="..\libcommonslim\array.c">
+      <Filter>libcommonslim</Filter>
     </ClCompile>
-    <ClCompile Include="..\libkagura\cJSON_Utils.c">
-      <Filter>common</Filter>
+    <ClCompile Include="..\libcommonslim\buffer_queue.c">
+      <Filter>libcommonslim</Filter>
     </ClCompile>
+    <ClCompile Include="..\libcommonslim\cJSON.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\cJSON_Utils.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\dictionary.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\elog.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\inihandler.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\misc.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\string_utils.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\trash_stack.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\util_internal.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libcommonslim\win32.c">
+      <Filter>libcommonslim</Filter>
+    </ClCompile>
+    <ClCompile Include="wsdd.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="gSOAP">
@@ -39,8 +69,8 @@
     <Filter Include="gSOAP\plugin">
       <UniqueIdentifier>{3d452212-bfbc-4b51-9906-8e414ccb8e18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="common">
-      <UniqueIdentifier>{b4da05cf-f991-4bb8-a052-80f8333f7b01}</UniqueIdentifier>
+    <Filter Include="libcommonslim">
+      <UniqueIdentifier>{3b8300f3-e88a-4e51-b94b-90ad8b81ac79}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,11 +94,62 @@
       <Filter>gSOAP\plugin</Filter>
     </ClInclude>
     <ClInclude Include="wsdd.h" />
-    <ClInclude Include="..\libkagura\cJSON.h">
-      <Filter>common</Filter>
+    <ClInclude Include="..\libcommonslim\array.h">
+      <Filter>libcommonslim</Filter>
     </ClInclude>
-    <ClInclude Include="..\libkagura\cJSON_Utils.h">
-      <Filter>common</Filter>
+    <ClInclude Include="..\libcommonslim\array_internal.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\buffer_queue.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\cJSON.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\cJSON_Utils.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\defs.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\dictionary.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\elog.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\exception.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\frame_queue.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\inihandler.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\json_helper.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\memwatch.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\misc.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\string_utils.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\struct_macro.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\trash_stack.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\util_internal.h">
+      <Filter>libcommonslim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libcommonslim\win32.h">
+      <Filter>libcommonslim</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

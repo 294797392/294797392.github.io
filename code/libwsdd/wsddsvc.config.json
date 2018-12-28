@@ -1,18 +1,22 @@
 {
+    "iface": "wlan0",
 
-    "interface": "wlan0",
-
-    "types": [
-        "tds:Device"
+    "supported_types": [
+        "tds:Device",
+        "discovery:NetworkVideoTransmitter"
     ],
 
-    "scopes": [
-        "nvif://www.onvif.org/name/IPC",
+    "supported_scopes": [
+        "onvif://www.onvif.org",
+        "onvif://www.onvif.org/",
+        "onvif://www.onvif.org/name/IPC",
         "onvif://www.onvif.org/hardware/MSTAR",
         "onvif://www.onvif.org/Profile/Streaming"
     ],
 
     "addresses": [
-        "http://{IP}:{PORT}/onvif/device_service"
-    ]
+        "http://%s/onvif/device_se11111rvice"
+    ],
+
+    "metadata_version": 75965
 }

@@ -6,15 +6,19 @@ Web Services Dynamic Discovery
 1. 客户端根据目标服务类型查找目标服务
 2. 客户端定位目标服务的位置
 
+## WS-Addressing
+WS-Addressing规范定义了一种将消息寻址信息综合到Web services消息中的标准。WS-Discovery基于WS-Addressing。
+WS-Addressing规范定义了两个新的元素：EndpointReference
+<wsa:EndpointReference>
+    <wsa:Address>xs:anyURI</wsa:Address>
+    [<wsa:ReferenceProperties>... </wsa:ReferenceProperties>]
+    [<wsa:ReferenceParameters>... </wsa:ReferenceParameters>]
+    [<wsa:PortType>xs:QName</wsa:PortType>]
+    [<wsa:ServiceName [PortName="xs:NCName"]>xs:QName</wsa:ServiceName>]
+    [<wsp:Policy> ... </wsp:Policy>]
+</wsa:EndpointReference>
+/wsa:EndpointReference/wsa:Address：服务的逻辑地址或者网络地址，必须是唯一的。逻辑地址可以使用UUID表示，网络地址可以使用HTTP/HTTPS地址表示
 
-## SOAP消息元素含义
-1. EndpointReference
-服务的唯一标识符，这个标识符必须是唯一的，推荐使用使用uuid:xxxxxxxxxxxx的格式作为唯一标识符的格式，如果服务端的网络地址（例如http，udp，tcp）可以保证是唯一的，那么在<a:EndpointReference>元素里也可以直接使用网络地址当做唯一标识符。
-<a:EndpointReference>
-	<a:Address>uuid:xxxxxxxxxxxx</a:Address>
-	[<a:ReferenceProperties>...</a:ReferenceProperties>]? 
-	... 
-</a:EndpointReference> 
 
 
 ## 服务端加入和离开网络

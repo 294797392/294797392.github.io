@@ -71,16 +71,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)/Dependencies/gsoap/gsoap;$(SolutionDir)/Dependencies/gsoap/gsoap/import;$(SolutionDir)/Dependencies/gsoap/gsoap/plugin;$(ProjectDir)/gSOAP_generated;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)/Dependencies/gsoap/gsoap;$(SolutionDir)/Dependencies/gsoap/gsoap/import;$(SolutionDir)/Dependencies/gsoap/gsoap/plugin;$(ProjectDir)/gSOAP_generated;$(SolutionDir)/Dependencies\pthread\include;$(SolutionDir)/libcommonslim;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\pthread\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;WIN32;WINDOWS;_TIMESPEC_DEFINED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>pthreadVC2.lib;pthreadVCE2.lib;pthreadVSE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,12 +127,22 @@
     <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\wsaapi.c" />
     <ClCompile Include="..\Dependencies\gsoap\gsoap\plugin\wsddapi.c" />
     <ClCompile Include="..\Dependencies\gsoap\gsoap\stdsoap2.c" />
-    <ClCompile Include="..\libkagura\cJSON.c" />
-    <ClCompile Include="..\libkagura\cJSON_Utils.c" />
-    <ClCompile Include="client_event_handler.c" />
+    <ClCompile Include="..\libcommonslim\array.c" />
+    <ClCompile Include="..\libcommonslim\buffer_queue.c" />
+    <ClCompile Include="..\libcommonslim\cJSON.c" />
+    <ClCompile Include="..\libcommonslim\cJSON_Utils.c" />
+    <ClCompile Include="..\libcommonslim\dictionary.c" />
+    <ClCompile Include="..\libcommonslim\elog.c" />
+    <ClCompile Include="..\libcommonslim\inihandler.c" />
+    <ClCompile Include="..\libcommonslim\misc.c" />
+    <ClCompile Include="..\libcommonslim\string_utils.c" />
+    <ClCompile Include="..\libcommonslim\trash_stack.c" />
+    <ClCompile Include="..\libcommonslim\util_internal.c" />
+    <ClCompile Include="..\libcommonslim\win32.c" />
     <ClCompile Include="gSOAP_generated\soapC.c" />
     <ClCompile Include="gSOAP_generated\soapClient.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="wsdd.c" />
     <ClCompile Include="wsddsvc.c" />
   </ItemGroup>
   <ItemGroup>
@@ -136,8 +150,25 @@
     <ClInclude Include="..\Dependencies\gsoap\gsoap\plugin\wsaapi.h" />
     <ClInclude Include="..\Dependencies\gsoap\gsoap\plugin\wsddapi.h" />
     <ClInclude Include="..\Dependencies\gsoap\gsoap\stdsoap2.h" />
-    <ClInclude Include="..\libkagura\cJSON.h" />
-    <ClInclude Include="..\libkagura\cJSON_Utils.h" />
+    <ClInclude Include="..\libcommonslim\array.h" />
+    <ClInclude Include="..\libcommonslim\array_internal.h" />
+    <ClInclude Include="..\libcommonslim\buffer_queue.h" />
+    <ClInclude Include="..\libcommonslim\cJSON.h" />
+    <ClInclude Include="..\libcommonslim\cJSON_Utils.h" />
+    <ClInclude Include="..\libcommonslim\defs.h" />
+    <ClInclude Include="..\libcommonslim\dictionary.h" />
+    <ClInclude Include="..\libcommonslim\elog.h" />
+    <ClInclude Include="..\libcommonslim\exception.h" />
+    <ClInclude Include="..\libcommonslim\frame_queue.h" />
+    <ClInclude Include="..\libcommonslim\inihandler.h" />
+    <ClInclude Include="..\libcommonslim\json_helper.h" />
+    <ClInclude Include="..\libcommonslim\memwatch.h" />
+    <ClInclude Include="..\libcommonslim\misc.h" />
+    <ClInclude Include="..\libcommonslim\string_utils.h" />
+    <ClInclude Include="..\libcommonslim\struct_macro.h" />
+    <ClInclude Include="..\libcommonslim\trash_stack.h" />
+    <ClInclude Include="..\libcommonslim\util_internal.h" />
+    <ClInclude Include="..\libcommonslim\win32.h" />
     <ClInclude Include="gSOAP_generated\soapH.h" />
     <ClInclude Include="gSOAP_generated\soapStub.h" />
     <ClInclude Include="wsdd.h" />
