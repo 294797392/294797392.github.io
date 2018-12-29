@@ -48,12 +48,30 @@ int wsdd_match(char **scopes, int scope_cnt, const char *target_scope)
 	return 1;
 }
 
-void wsdd_fill_buffer(char *buff, char **datas, int len)
+void wsdd_concat_types(char *buff, char **datas, int len)
 {
 	for (int i = 0; i < len; i++)
 	{
 		char *data = datas[i];
 		strncat(buff, data, strlen(data));
-		strncat(buff, " ", 1);
+		if (len - 1 != i)
+		{
+			strncat(buff, " ", 1);
+		}
+	}
+}
+
+void wsdd_concat_xaddrs(char *buff, char **addrs, int len, char *ip)
+{
+	for (int i = 0; i < len; i++)
+	{
+		char *urlfmt = addrs[i];
+		char url[1024] = { '\0' };
+		snprintf(url, sizeof(url), urlfmt, ip);
+		strncat(buff, url, strlen(url));
+		if (len - 1 != i)
+		{
+			strncat(buff, " ", 1);
+		}
 	}
 }

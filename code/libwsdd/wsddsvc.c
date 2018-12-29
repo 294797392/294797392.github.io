@@ -12,7 +12,7 @@
 
 /* gSOAP ws-discovery,ws-addressing plugin */
 #include <wsddapi.h>
-#include <wsaapi.h>
+#include <wsaapi.h> 
 
 /* libwsdd */
 #include "wsdd.h"
@@ -24,17 +24,19 @@
 
 #ifdef WIN32
 #define CONFIG_PATH "wsddsvc.config.json"
+#define LOG_CFGF_PATH "../log.ini"
 #else
 #define CONFIG_PATH "/etc/wsddsvc/wsddsvc.config.json"
+#define LOG_CFGF_PATH /etc/wsddsvc/log.ini
 #endif
 
-typedef struct wsddsvc_config_s
+typedef struct service_info_s
 {
-	/*
-	 * 发送probe多播消息使用的网络接口
-	 * 监听客户端请求的网络接口
-	*/
-	char *iface;
+	/* 服务名字 */
+	char *name;
+
+	/* 唯一标识符 */
+	char endpoint[4096];
 
 	/*
 	 * 所支持的服务类型
@@ -43,6 +45,7 @@ typedef struct wsddsvc_config_s
 	 */
 	char **supported_types;
 	int supported_type_cnt;
+	char types[4096];
 
 	/*
 	 * 服务范围信息
@@ -51,43 +54,46 @@ typedef struct wsddsvc_config_s
 	 */
 	char **supported_scopes;
 	int supported_scope_cnt;
+	char scopes[4096];
 
 	/* 可以直接访问的服务地址（http/https/udp/tcp） */
 	char **addresses;
 	int address_cnt;
+	char xaddrs[4096];
 
 	/* soap元数据版本信息 */
 	int metadata_version;
 
-}wsddsvc_config;
+}service_info;
 
-typedef struct endpoint_reference_s
+typedef struct wsddsvc_config_s
 {
 	/*
-		服务的逻辑地址或者网络地址，必须是唯一的
-		如果是一个逻辑地址，那么网络地址存放在XAddrs元素里
-
-		参考：
-			https://www.w3.org/Submission/ws-addressing/#Toc77464317 2. Endpoint References
-			ws-discovery.pdf 2.6 Endpoint References
+	 * 发送probe多播消息使用的网络接口
+	 * 监听客户端请求的网络接口
 	*/
-	const char *address;
+	char *ifname;
 
-}endpoint_reference;
+	/* 支持的所有服务类型 */
+	char *supported_types;
+	char *supported_scopes;
+	char *xaddrs;
+
+	/* 存储服务信息 */
+	service_info *svclist;
+	int svc_cnt;
+
+}wsddsvc_config;
 
 struct wsddsvc_s
 {
-	endpoint_reference *epref;
-
 	wsddsvc_config *config;
 
-	char ipaddrs[32][IPADDR_LEN];
-
-	/* 与服务通信的真正地址 */
-	char xaddress[1024];
-
-	char types[4096];
-	char scopes[4096];
+	/*
+	 * 配置文件里的网络接口对应的IP地址
+	 * 取第一个地址
+	 */
+	char ipaddr[64];
 };
 
 
@@ -122,22 +128,53 @@ soap_wsdd_mode wsdd_event_Probe(struct soap *soap, const char *MessageID, const 
 	wsddsvc *svc = (wsddsvc*)soap->user;
 	int ret = SOAP_OK;
 
-	/* 匹配Scope和Type */
-	if (wsdd_match(svc->config->supported_scopes, svc->config->supported_scope_cnt, Scopes) == 0 ||
-		wsdd_match(svc->config->supported_types, svc->config->supported_type_cnt, Types) == 0)
+	/* 从配置文件里找对应的服务信息 */
+	int matched = 0;
+	service_info *service = NULL;
+	for (int i = 0; i < svc->config->svc_cnt; i++)
 	{
+		service = &svc->config->svclist[i];
+		/* 匹配Scope和Type */
+		if (wsdd_match(service->supported_scopes, service->supported_scope_cnt, Scopes) == 1 &&
+			wsdd_match(service->supported_types, service->supported_type_cnt, Types) == 1)
+		{
+			matched = 1;
+			/* 如果服务信息的Endpoint是空的，则默认填写uuid */
+			if (!service->endpoint || strlen(service->endpoint) == 0)
+			{
+				/* 在配置文件里没指定EndpointReference，自动生成 */
+				const char *uuid = soap_wsa_rand_uuid(soap);
+				strncpy(svc->config->svclist[i].endpoint, uuid, strlen(uuid));
+			}
+
+			if (!service->xaddrs || strlen(service->xaddrs) == 0)
+			{
+				wsdd_concat_xaddrs(svc->config->svclist[i].xaddrs, service->addresses, service->address_cnt, svc->ipaddr);
+			}
+			break;
+		}
+	}
+
+	/* 没找到服务信息，什么都不做 */
+	if (matched == 0)
+	{
+		log_error(MODULE, "no matched service, scopes:%s, types:%s", Scopes, Types);
 		return SOAP_WSDD_ADHOC;
 	}
 
+	log_info(MODULE, "find service, name:%s, endpoint:%s, address:%s", service->name, service->endpoint, service->xaddrs);
+
 	/* 初始化结构体 */
 	soap_wsdd_init_ProbeMatches(soap, matches);
-	const char *endpoint_reference = soap_wsa_rand_uuid(soap);
+	const char *endpoint_reference = service->endpoint;
 	const char *matchBy = NULL;  /* scope的匹配规则 */
-	char *xaddr = svc->xaddress;
-	int metadata_version = svc->config->metadata_version;
+	char *xaddr = service->xaddrs;
+	int metadata_version = service->metadata_version;
+	const char *types = service->types;
+	const char *scopes = service->scopes;
 
 	/* 填充结构体 */
-	if ((ret = soap_wsdd_add_ProbeMatch(soap, matches, endpoint_reference, Types, svc->scopes, MatchBy, xaddr, metadata_version)) != SOAP_OK)
+	if ((ret = soap_wsdd_add_ProbeMatch(soap, matches, endpoint_reference, types, scopes, MatchBy, xaddr, metadata_version)) != SOAP_OK)
 	{
 		log_error(MODULE, "soap_wsdd_add_ProbeMatch failed, %d", ret);
 		return SOAP_WSDD_ADHOC;
@@ -158,11 +195,16 @@ soap_wsdd_mode wsdd_event_Probe(struct soap *soap, const char *MessageID, const 
 
 
 
-
-
-
-
-
+static void parse_service_info(cJSON* json, struct service_info_s *svcinfo)
+{
+	json_deserialize_ptr_array(json, supported_types, svcinfo, supported_types, supported_type_cnt, string);
+	json_deserialize_ptr_array(json, supported_scopes, svcinfo, supported_scopes, supported_scope_cnt, string);
+	json_deserialize_ptr_array(json, addresses, svcinfo, addresses, address_cnt, string);
+	json_deserialize(json, metadata_version, svcinfo, metadata_version, int);
+	json_deserialize(json, name, svcinfo, name, string);
+	wsdd_concat_types(svcinfo->types, svcinfo->supported_types, svcinfo->supported_type_cnt);
+	wsdd_concat_types(svcinfo->scopes, svcinfo->supported_scopes, svcinfo->supported_scope_cnt);
+}
 
 static wsddsvc_config* parse_wsddsvc_config(const char *path)
 {
@@ -190,20 +232,20 @@ static wsddsvc_config* parse_wsddsvc_config(const char *path)
 	}
 
 	// deserialize config
-	json_deserialize(json, iface, config, iface, string);
-	json_deserialize_ptr_array(json, supported_types, config, supported_types, supported_type_cnt, string);
-	json_deserialize_ptr_array(json, supported_scopes, config, supported_scopes, supported_scope_cnt, string);
-	json_deserialize_ptr_array(json, addresses, config, addresses, address_cnt, string);
-	json_deserialize(json, metadata_version, config, metadata_version, int);
+	json_deserialize(json, ifname, config, ifname, string);
+	json_deserialize(json, supported_types, config, supported_types, string);
+	json_deserialize(json, supported_scopes, config, supported_scopes, string);
+	json_deserialize(json, xaddrs, config, xaddrs, string);
+	json_deserialize_ptr_struct_array(json, services, config, svclist, svc_cnt, service_info, parse_service_info);
 	cJSON_Delete(json);
 
 	return config;
 }
 
-static void retrive_ipaddr(wsddsvc *svc, const char *ifname)
+static void getip(char *ipbuf, const char *ifname)
 {
 #ifdef WINDOWS
-	strncpy(svc->ipaddrs[0], LOCAL_IPADDR, IPADDR_LEN);
+	strncpy(ipbuf, LOCAL_IPADDR, IPADDR_LEN);
 #else
 
 #endif
@@ -245,41 +287,36 @@ static struct soap *init_soap_udp(void *user_data)
 
 wsddsvc* start_wsddsvc()
 {
+	log_init(LOG_CFGF_PATH);
+
 	wsddsvc *svc = (wsddsvc*)calloc(1, sizeof(wsddsvc));
 	if (!svc)
 	{
 		log_error(MODULE, "malloc svc instance failed\n");
 		goto error;
 	}
-	svc->epref = (endpoint_reference*)calloc(1, sizeof(endpoint_reference));
-	
+
 	if (!(svc->config = parse_wsddsvc_config(CONFIG_PATH)))
 	{
 		log_error(MODULE, "parse wsddsvc config failed");
 		goto error;
 	}
 
-	wsdd_fill_buffer(svc->types, svc->config->supported_types, svc->config->supported_type_cnt);
-	wsdd_fill_buffer(svc->scopes, svc->config->supported_scopes, svc->config->supported_scope_cnt);
-	retrive_ipaddr(svc, svc->config->iface);
-
-	snprintf(svc->xaddress, sizeof(svc->xaddress), svc->config->addresses[0], svc->ipaddrs[0]);
+	getip(svc->ipaddr, svc->config->ifname);
 
 	struct soap *soap = init_soap_udp(svc);
 
 	/* 发送Hello消息 */
 	const char *messageID = soap_wsa_rand_uuid(soap);
 	const char *relatesTo = NULL;
-	const char *ep = soap_wsa_rand_uuid(soap);
 	const char *endpoint_reference = soap_wsa_rand_uuid(soap);
-	char *types = svc->config->supported_types[0];
-	char *scopes = svc->config->supported_scopes[0];
 	const char *matchBy = NULL;  /* scope的匹配规则 */
-	char *xaddr = svc->xaddress;
-	svc->epref->address = ep;
-	int metadata_version = svc->config->metadata_version;
+	const char *scopes = svc->config->supported_scopes;
+	const char *types = svc->config->supported_types;
+	char xaddr[1024] = { '\0' };
+	snprintf(xaddr, sizeof(xaddr), svc->config->xaddrs, svc->ipaddr);
 
-	int ret = soap_wsdd_Hello(soap, SOAP_WSDD_ADHOC, WSDD_SOAP_TS_ADDRESS, messageID, relatesTo, endpoint_reference, types, scopes, matchBy, xaddr, metadata_version);
+	int ret = soap_wsdd_Hello(soap, SOAP_WSDD_ADHOC, WSDD_SOAP_TS_ADDRESS, messageID, relatesTo, endpoint_reference, types, scopes, matchBy, xaddr, WSDD_METADATA_VERSION);
 	if (ret == SOAP_OK)
 	{
 		soap_wsdd_listen(soap, 1);

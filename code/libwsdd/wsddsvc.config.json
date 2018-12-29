@@ -1,22 +1,44 @@
 {
-    "iface": "wlan0",
+    "ifname": "wlan0",
+    "supported_types": "tds:Device discovery:NetworkVideoTransmitter",
+    "supported_scopes": "onvif://www.onvif.org onvif://www.onvif.org/ onvif://www.onvif.org/name/IPC onvif://www.onvif.org/hardware/MSTAR onvif://www.onvif.org/Profile/Streaming",
+    "xaddrs": "http://%s:1018/onvif/device_service",
+    "services": [
+        {
+            "name": "device_service",
+            "supported_types": [
+                "tds:Device"
+            ],
+            "supported_scopes": [
+                "onvif://www.onvif.org",
+                "onvif://www.onvif.org/",
+                "onvif://www.onvif.org/name/IPC",
+                "onvif://www.onvif.org/hardware/MSTAR",
+                "onvif://www.onvif.org/Profile/Streaming"
+            ],
+            "addresses": [
+                "http://%s:1018/onvif/device_service"
+            ],
+            "metadata_version": 75965
+        },
 
-    "supported_types": [
-        "tds:Device",
-        "discovery:NetworkVideoTransmitter"
-    ],
-
-    "supported_scopes": [
-        "onvif://www.onvif.org",
-        "onvif://www.onvif.org/",
-        "onvif://www.onvif.org/name/IPC",
-        "onvif://www.onvif.org/hardware/MSTAR",
-        "onvif://www.onvif.org/Profile/Streaming"
-    ],
-
-    "addresses": [
-        "http://%s:1018/onvif/device_service"
-    ],
-
-    "metadata_version": 75965
+        {
+            "name": "NetworkVideoService",
+            "supported_types": [
+                "discovery:NetworkVideoTransmitter",
+                "discovery:NetworkVideoDisplay"
+            ],
+            "supported_scopes": [
+                "onvif://www.onvif.org",
+                "onvif://www.onvif.org/",
+                "onvif://www.onvif.org/name/IPC",
+                "onvif://www.onvif.org/hardware/MSTAR",
+                "onvif://www.onvif.org/Profile/Streaming"
+            ],
+            "addresses": [
+                "http://%s:1018/onvif/device_service"
+            ],
+            "metadata_version": 75965
+        }
+    ]
 }
