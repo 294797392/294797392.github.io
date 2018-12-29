@@ -47,3 +47,13 @@ int wsdd_match(char **scopes, int scope_cnt, const char *target_scope)
 
 	return 1;
 }
+
+void wsdd_fill_buffer(char *buff, char **datas, int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		char *data = datas[i];
+		strncat(buff, data, strlen(data));
+		strncat(buff, " ", 1);
+	}
+}

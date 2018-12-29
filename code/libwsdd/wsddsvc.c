@@ -71,7 +71,7 @@ typedef struct endpoint_reference_s
 			https://www.w3.org/Submission/ws-addressing/#Toc77464317 2. Endpoint References
 			ws-discovery.pdf 2.6 Endpoint References
 	*/
-	char *address;
+	const char *address;
 
 }endpoint_reference;
 
@@ -85,6 +85,9 @@ struct wsddsvc_s
 
 	/* 与服务通信的真正地址 */
 	char xaddress[1024];
+
+	char types[4096];
+	char scopes[4096];
 };
 
 
@@ -134,7 +137,7 @@ soap_wsdd_mode wsdd_event_Probe(struct soap *soap, const char *MessageID, const 
 	int metadata_version = svc->config->metadata_version;
 
 	/* 填充结构体 */
-	if ((ret = soap_wsdd_add_ProbeMatch(soap, matches, endpoint_reference, Types, Scopes, MatchBy, xaddr, metadata_version)) != SOAP_OK)
+	if ((ret = soap_wsdd_add_ProbeMatch(soap, matches, endpoint_reference, Types, svc->scopes, MatchBy, xaddr, metadata_version)) != SOAP_OK)
 	{
 		log_error(MODULE, "soap_wsdd_add_ProbeMatch failed, %d", ret);
 		return SOAP_WSDD_ADHOC;
@@ -249,13 +252,15 @@ wsddsvc* start_wsddsvc()
 		goto error;
 	}
 	svc->epref = (endpoint_reference*)calloc(1, sizeof(endpoint_reference));
-
+	
 	if (!(svc->config = parse_wsddsvc_config(CONFIG_PATH)))
 	{
 		log_error(MODULE, "parse wsddsvc config failed");
 		goto error;
 	}
 
+	wsdd_fill_buffer(svc->types, svc->config->supported_types, svc->config->supported_type_cnt);
+	wsdd_fill_buffer(svc->scopes, svc->config->supported_scopes, svc->config->supported_scope_cnt);
 	retrive_ipaddr(svc, svc->config->iface);
 
 	snprintf(svc->xaddress, sizeof(svc->xaddress), svc->config->addresses[0], svc->ipaddrs[0]);

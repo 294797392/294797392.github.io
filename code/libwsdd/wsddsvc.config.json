@@ -15,7 +15,7 @@
     ],
 
     "addresses": [
-        "http://%s/onvif/device_se11111rvice"
+        "http://%s:1018/onvif/device_service"
     ],
 
     "metadata_version": 75965
